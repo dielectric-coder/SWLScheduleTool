@@ -2,18 +2,16 @@
 
 import sys
 import os
-import subprocess
 import csv
 from datetime import datetime, timezone
 
 def main():
     # Configuration
     SCHED_DIR = "/home/mikel/Documents/Radio/sw-schedules"
-    SAY_CMD = ['/usr/bin/piper', '--model', 'fr_FR-siwis-medium', '--output_file', 'tmp.wav']
     
     # Check if frequency argument is provided
     if len(sys.argv) < 2:
-        print("Usage: chksked.py <frequency_in_kHz>")
+        print("Usage: checksked.py <frequency_in_kHz>")
         sys.exit(1)
     
     frequency = sys.argv[1]
@@ -26,19 +24,9 @@ def main():
     os.system('clear')
     
     # Display header
-    print(f"Stations programmées pour {frequency} kHz")
-    print(f"Heure UTC actuelle: {current_utc.strftime('%H:%M')}")
+    print(f"Stations programmées à la fréquence {frequency} kHz")
+    print(f"Pour l'heure UTC actuelle: {current_utc.strftime('%H:%M')}")
     print()
-    
-    # Text-to-speech announcement
-    try:
-        announcement = f"Liste des stations en ondes sur {frequency} kilohertz"
-        process = subprocess.Popen(SAY_CMD, stdin=subprocess.PIPE, 
-                                   stdout=subprocess.DEVNULL, 
-                                   stderr=subprocess.DEVNULL)
-        process.communicate(input=announcement.encode())
-    except Exception:
-        pass  # Silently ignore TTS errors
     
     # Process the CSV file
     csv_file = os.path.join(SCHED_DIR, "sked-current.csv")

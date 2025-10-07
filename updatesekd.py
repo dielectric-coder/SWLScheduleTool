@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-# File: /home/mikel/GitSpace/swl-tools/updsked.py
 
 import sys
 import os
 import subprocess
 import urllib.request
 import shutil
+import re
 
 def main():
     # Configuration
@@ -14,11 +14,19 @@ def main():
     
     # Check if schedule period argument is provided
     if len(sys.argv) < 2:
-        print("Usage: updsked.py <schedule_period>")
-        print("Example: updsked.py A23")
+        print("Usage: upddatesked.py <schedule_period>")
+        print("Example: updatesked.py a25 or b25")
+        print("Format: lowercase 'a' or 'b' followed by 2 digits")
         sys.exit(1)
     
     period = sys.argv[1]
+    
+    # Validate period format: must be 'a' or 'b' followed by exactly 2 digits
+    if not re.match(r'^[ab]\d{2}$', period):
+        print("Error: Invalid schedule period format!")
+        print("Period must be lowercase 'a' or 'b' followed by 2 digits")
+        print("Examples: a25, b25, a24, b24")
+        sys.exit(1)
     
     # Change to schedule directory
     original_dir = os.getcwd()

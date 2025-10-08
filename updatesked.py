@@ -12,7 +12,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Configuration
-    SCHED_DIR = os.path.join(script_dir, "sw-schedules")
+    SCHED_DIR = os.path.join(script_dir, "swl-schedules-data")
     BASE_URL = "http://eibispace.de/dx"
     
     # Create schedule directory if it doesn't exist

@@ -50,6 +50,10 @@ def main():
                     target = row[6] if len(row) > 6 else ""
                     site = row[7] if len(row) > 7 else ""
                     
+                    # Use country code with '/' prefix if site is empty
+                    if not site or site.strip() == "":
+                        site = f"/{country}"
+                    
                     # Calculate duration and check if currently broadcasting
                     duration = 0
                     is_active = False

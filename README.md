@@ -125,6 +125,7 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 ## Data Source
 
 Schedule data is based on the EiBi (Eibi) shortwave broadcast schedule database.
+http://eibispace.de/
 
 ## License
 

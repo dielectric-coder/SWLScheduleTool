@@ -129,11 +129,11 @@ http://eibispace.de/
 
 ## License
 
-[Specify your license here]
+GPLv3
 
 ## Author
 
-[Your name/contact information]
+Michel Lachaine, mike@mikelachaine.ca
 
 ## Acknowledgments
 

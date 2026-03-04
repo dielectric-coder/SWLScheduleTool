@@ -44,6 +44,8 @@ Downloads the latest schedule data from EiBi for the specified season:
 - Loads `transmitter-sites.json` for site lookups keyed by `(country, site_code)`
 - Haversine formula for distance, initial bearing with 8-point compass labels
 - ON AIR rows highlighted in bold green with remaining time
+- NEXT indicator in light grey showing time until broadcast starts for inactive stations
+- Station detail modal (Enter on row) with round blue border
 - DataTable with sortable columns, zebra stripes, row cursor
 - Key bindings: Enter to search/update, F5 to update schedules, q/Escape to quit
 

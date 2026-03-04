@@ -237,7 +237,16 @@ def compute_on_air(time_range, current_time):
     dur_str = f"{duration:04d}"
 
     if not is_active:
-        return dur_str, False, ""
+        # Calculate time until next start
+        cur_h, cur_m = current_time // 100, current_time % 100
+        sta_h, sta_m = start_time // 100, start_time % 100
+        cur_total = cur_h * 60 + cur_m
+        sta_total = sta_h * 60 + sta_m
+        if sta_total <= cur_total:
+            sta_total += 24 * 60
+        until = sta_total - cur_total
+        uh, um = until // 60, until % 60
+        return dur_str, False, f"→ NEXT {uh:02d}h{um:02d}"
 
     # Calculate remaining time
     cur_h, cur_m = current_time // 100, current_time % 100
@@ -282,14 +291,16 @@ DETAIL_CSS = """
     align: center middle;
     width: 100%;
     height: 100%;
+    background: black 50%;
 }
 
 #detail-card {
     width: 64;
     height: auto;
     max-height: 90%;
-    border: thick $accent;
-    background: $surface;
+    border: round #769ff0;
+    background: black;
+    color: #a9b1d6;
     padding: 1 2;
 }
 
@@ -342,7 +353,7 @@ Screen {
 #title-bar {
     dock: top;
     height: 1;
-    background: #394260;
+    background: black;
     color: #a3aed2;
     text-style: bold;
     padding: 0 1;
@@ -351,7 +362,7 @@ Screen {
 #input-bar {
     dock: top;
     height: 2;
-    background: #1d2230;
+    background: black;
     padding: 0 1;
 }
 
@@ -373,7 +384,7 @@ Screen {
 
 #input-bar Input {
     height: 1;
-    background: #212736;
+    background: black;
     color: #769ff0;
     border: none;
 }
@@ -388,12 +399,13 @@ Screen {
 
 #schedule-table {
     height: 1fr;
+    background: black;
 }
 
 #status-bar {
     dock: bottom;
     height: 1;
-    background: #394260;
+    background: black;
     color: #a3aed2;
     padding: 0 1;
 }
@@ -464,7 +476,7 @@ class SWLApp(App):
                     yield Input(placeholder="b25", id="period-input")
         yield DataTable(id="schedule-table")
         yield RichLog(id="update-log", highlight=True, markup=True)
-        yield Static(id="status-bar")
+        yield Static(id="status-bar", markup=True)
         yield Footer()
 
     def on_mount(self):
@@ -496,7 +508,7 @@ class SWLApp(App):
     def _update_status(self):
         bar = self.query_one("#status-bar", Static)
         bar.update(
-            f"  {len(self.sites_index)} sites loaded  |  {len(self.schedule)} schedules"
+            f"  {len(self.sites_index)} sites loaded  |  {len(self.schedule)} schedules  |  [#aaaaaa]→ NEXT time[/#aaaaaa]"
         )
 
     def check_action(self, action, parameters):
@@ -570,6 +582,8 @@ class SWLApp(App):
 
             if is_active:
                 cells = [Text(str(c), style="bold green") for c in cells]
+            else:
+                cells = [Text(str(c), style="#aaaaaa") for c in cells]
 
             table.add_row(*cells, key=str(row_index))
 

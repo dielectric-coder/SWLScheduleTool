@@ -12,7 +12,8 @@ This project provides utilities to query and display shortwave radio broadcast s
 - **Real-time Schedule Checking**: Query current broadcasts on any frequency
 - **Bearing & Distance**: Great-circle distance and compass bearing from your QTH to each transmitter site
 - **UTC Time Display**: All times shown in UTC for international coordination
-- **Active Station Highlighting**: Currently broadcasting stations are highlighted in green
+- **Active Station Highlighting**: Currently broadcasting stations are highlighted in bold green
+- **Next Broadcast Display**: Inactive stations show time until next broadcast in light grey
 - **Remaining Time Display**: Shows how much time is left for active broadcasts
 - **Midnight Crossing Support**: Correctly handles broadcasts that span across midnight
 - **Multi-language Support**: Displays station language and target area information
@@ -64,7 +65,9 @@ Launches a full-screen terminal dashboard with:
 - Two inputs: **Frequency** (kHz, press Enter to search) and **Update** (schedule period like `b25`, press Enter to download)
 - Live UTC clock
 - Schedule table with distance (km) and bearing from your QTH
-- ON AIR highlighting for active broadcasts
+- ON AIR highlighting (bold green) for active broadcasts
+- NEXT time display (light grey) for upcoming broadcasts
+- Station detail modal on row select (Enter)
 - Press `F5` to update schedules, `q` or `Escape` to quit
 
 ### Check Stations on a Frequency

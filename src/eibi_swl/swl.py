@@ -769,7 +769,8 @@ class SWLApp(App):
                 ["azmap",
                  str(self.qth["lat"]), str(self.qth["lon"]),
                  str(si["lat"]), str(si["lon"]),
-                 "-c", self.qth["name"], "-t", target_name],
+                 "-c", self.qth["name"], "-t", target_name,
+                 "-d", detail],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )

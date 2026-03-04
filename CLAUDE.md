@@ -141,7 +141,7 @@ cp packaging/swl.desktop ~/.local/share/applications/
 - Station detail modal (Enter on row) with round blue border
 - DataTable with sortable columns, zebra stripes, row cursor
 - Key bindings: Enter to search/update, F5 to update schedules, m to show azMap, q/Escape to quit
-- **azMap IPC** (`m` key): sends target coordinates to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon from `swlconfig.conf` as center, transmitter site lat/lon as target, plus `-c` (QTH name) and `-t` (station name) flags. This ensures azMap always uses the same QTH coordinates as the dashboard for consistent distance/bearing calculations. Wire format for FIFO: `lat,lon,name\n` (e.g. `12.6833,-8.0333,CRI-Bamako (5995 kHz)\n`). This allows updating the azMap target in-place without spawning a new window each time.
+- **azMap IPC** (`m` key): sends target coordinates and station details to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon as center, transmitter site lat/lon as target, plus `-c` (QTH name), `-t` (station name), and `-d` (station detail string) flags. The `-d` flag passes `station|freq|country|site|lang|target` so azMap has full station info on first launch. FIFO wire format: `lat,lon,name|station|freq kHz|country|site|lang|target\n`. Subsequent `m` presses send updates via FIFO to the running instance.
 
 **src/eibi_swl/checksked.py** - Query tool for checking active broadcasts
 - Reads `swl-schedules-data/sked-current.csv` (semicolon-delimited CSV)
@@ -149,7 +149,7 @@ cp packaging/swl.desktop ~/.local/share/applications/
 - Compares current UTC time against schedule entries
 - Uses `rich` library for output: `Panel` header with frequency/UTC time, `Table` for schedule rows
 - Active broadcasts highlighted in bold green with `◄ ON AIR` indicator and remaining time
-- Uses latin-1 encoding to read CSV files
+- Uses UTF-8 encoding to read CSV files (converted from ISO-8859-1 by updatesked)
 
 **src/eibi_swl/updatesked.py** - Schedule update tool
 - Downloads schedule files from `http://eibispace.de/dx`

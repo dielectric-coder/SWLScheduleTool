@@ -32,6 +32,21 @@ Downloads the latest schedule data from EiBi for the specified season:
 
 ### Main Scripts
 
+**swl.py** - Interactive TUI dashboard (Textual)
+- Full-screen terminal UI with live UTC clock, frequency search, and schedule table
+- Tokyo Night theme with black background
+- Starship-style powerline input prompts (two-line `╭─░▒▓`/`╰─` segments with nerd font glyphs)
+- Two input fields: Frequency (kHz) and Update (schedule period, e.g. `b25`, `a26`)
+  - Enter in frequency input → search; Enter in period input → download schedules
+  - Period validated with `^[ab]\d{2}$` before calling `updatesked.py`
+- Displays bearing and great-circle distance from user's QTH to each transmitter site
+- Uses `swlconfig.conf` for QTH coordinates (INI format with `[qth]` section: lat, lon, name)
+- Loads `transmitter-sites.json` for site lookups keyed by `(country, site_code)`
+- Haversine formula for distance, initial bearing with 8-point compass labels
+- ON AIR rows highlighted in bold green with remaining time
+- DataTable with sortable columns, zebra stripes, row cursor
+- Key bindings: Enter to search/update, F5 to update schedules, q/Escape to quit
+
 **checksked.py** - Query tool for checking active broadcasts
 - Reads `swl-schedules-data/sked-current.csv` (semicolon-delimited CSV)
 - Parses broadcast time ranges and handles midnight-crossing broadcasts
@@ -105,11 +120,28 @@ Output uses the `rich` library:
 - Warning messages styled `yellow`
 - Console width set to minimum 110 columns for proper table rendering
 
+### Configuration
+
+**swlconfig.conf** - User QTH location (INI format)
+```ini
+[qth]
+lat = 45.5017
+lon = -73.5673
+name = Montreal, QC
+```
+
+Read by `swl.py` using `configparser` (stdlib). Used for bearing/distance calculations.
+
 ## Dependencies
 
 Python 3.x:
 - `sys`, `os`, `csv`, `datetime`, `rich` (checksked.py)
 - `sys`, `os`, `subprocess`, `urllib.request`, `shutil`, `re`, `json` (updatesked.py)
+- `os`, `sys`, `csv`, `json`, `configparser`, `subprocess`, `re`, `math`, `datetime`, `textual`, `rich` (swl.py)
+
+External Python packages:
+- `rich` - Terminal formatting (checksked.py, swl.py)
+- `textual` - TUI framework (swl.py) — install via `sudo pacman -S python-textual`
 
 Optional external commands:
 - `cowsay` and `lolcat` - Used by updatesked.py for completion message (graceful fallback if unavailable)

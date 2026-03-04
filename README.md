@@ -8,13 +8,16 @@ This project provides utilities to query and display shortwave radio broadcast s
 
 ## Features
 
+- **Interactive TUI Dashboard**: Full-screen terminal UI with live UTC clock, frequency search, bearing and distance display
 - **Real-time Schedule Checking**: Query current broadcasts on any frequency
+- **Bearing & Distance**: Great-circle distance and compass bearing from your QTH to each transmitter site
 - **UTC Time Display**: All times shown in UTC for international coordination
 - **Active Station Highlighting**: Currently broadcasting stations are highlighted in green
 - **Remaining Time Display**: Shows how much time is left for active broadcasts
 - **Midnight Crossing Support**: Correctly handles broadcasts that span across midnight
 - **Multi-language Support**: Displays station language and target area information
 - **Transmitter Site Extraction**: Extracts transmitter sites with GPS coordinates to JSON
+- **Integrated Schedule Updates**: Update EiBi data directly from the TUI
 
 ## Installation
 
@@ -34,7 +37,35 @@ python3 --version
 chmod +x checksked.py
 ```
 
+## Configuration
+
+Create or edit `swlconfig.conf` in the project root with your QTH (station location):
+
+```ini
+[qth]
+lat = 45.5017
+lon = -73.5673
+name = Montreal, QC
+```
+
+This is used by `swl.py` to calculate bearing and distance to each transmitter site.
+
 ## Usage
+
+### Interactive TUI Dashboard
+
+```bash
+./swl.py
+```
+
+Launches a full-screen terminal dashboard with:
+- Tokyo Night theme with black background
+- Starship-style powerline input prompts (requires Nerd Font)
+- Two inputs: **Frequency** (kHz, press Enter to search) and **Update** (schedule period like `b25`, press Enter to download)
+- Live UTC clock
+- Schedule table with distance (km) and bearing from your QTH
+- ON AIR highlighting for active broadcasts
+- Press `F5` to update schedules, `q` or `Escape` to quit
 
 ### Check Stations on a Frequency
 
@@ -143,8 +174,10 @@ Common target area codes:
 ## Requirements
 
 - Python 3.x
-- Standard library modules: `sys`, `os`, `csv`, `datetime`, `json`, `re`
+- Standard library modules: `sys`, `os`, `csv`, `datetime`, `json`, `re`, `configparser`, `math`
 - External: `rich` (install via `pip install rich` or `pacman -S python-rich`)
+- External: `textual` (install via `pip install textual` or `pacman -S python-textual`) — required for `swl.py`
+- A [Nerd Font](https://www.nerdfonts.com/) terminal font — required for powerline glyphs in `swl.py`
 
 ## Contributing
 

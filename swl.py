@@ -101,9 +101,8 @@ def resolve_target_name(code, target_names, country_names):
 def load_language_names():
     """Parse README Section I language codes → {code: name}."""
     names = {}
-    readme = README_FILE
     try:
-        with open(readme, "r", encoding="utf-8") as f:
+        with open(README_FILE, "r", encoding="utf-8") as f:
             lines = f.readlines()
     except FileNotFoundError:
         return names
@@ -200,12 +199,12 @@ def load_schedule():
                     continue
                 rows.append({
                     "freq": row[0].strip(),
-                    "time": row[1].strip() if len(row) > 1 else "",
-                    "days": row[2].strip() if len(row) > 2 else "",
-                    "itu": row[3].strip() if len(row) > 3 else "",
-                    "station": row[4].strip() if len(row) > 4 else "",
-                    "lng": row[5].strip() if len(row) > 5 else "",
-                    "target": row[6].strip() if len(row) > 6 else "",
+                    "time": row[1].strip(),
+                    "days": row[2].strip(),
+                    "itu": row[3].strip(),
+                    "station": row[4].strip(),
+                    "lng": row[5].strip(),
+                    "target": row[6].strip(),
                     "site_code": row[7].strip() if len(row) > 7 else "",
                 })
     except FileNotFoundError:
@@ -217,13 +216,13 @@ def compute_on_air(time_range, current_time):
     """Check if broadcast is active and compute duration/remaining time.
     Returns (duration, is_active, remaining_str)."""
     if "-" not in time_range:
-        return "—", False, ""
+        return "—", False, "—"
     try:
         start_s, end_s = time_range.split("-")
         start_time = int(start_s)
         end_time = int(end_s)
     except (ValueError, IndexError):
-        return "—", False, ""
+        return "—", False, "—"
 
     duration = end_time - start_time
     is_active = False
@@ -336,7 +335,7 @@ class DetailScreen(ModalScreen):
         self.detail_text = detail_text
 
     def compose(self):
-        from textual.containers import Container
+        from textual.containers import Container  # local import to avoid circular at module level
         with Container(id="detail-container"):
             with Container(id="detail-card"):
                 yield Static("Station Detail", id="detail-title")
@@ -454,13 +453,13 @@ class SWLApp(App):
         "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
         "[#090c0c on #a3aed2]  Frequency [/]"
-        "[#a3aed2 on #1d2230]\ue0b0[/]"
+        "[#a3aed2 on black]\ue0b0[/]"
     )
     UPDATE_LABEL = (
         "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
         "[#090c0c on #a3aed2]  Update [/]"
-        "[#a3aed2 on #1d2230]\ue0b0[/]"
+        "[#a3aed2 on black]\ue0b0[/]"
     )
 
     def compose(self):
@@ -700,14 +699,19 @@ class SWLApp(App):
 
             if proc.returncode == 0:
                 self.call_from_thread(log.write, "[bold green]Update complete. Reloading data...[/bold green]")
-                self.sites_index = load_sites()
-                self.schedule = load_schedule()
-                self.call_from_thread(self._update_status)
+                sites = load_sites()
+                schedule = load_schedule()
+                self.call_from_thread(self._apply_reload, sites, schedule)
                 self.call_from_thread(log.write, "[bold green]Data reloaded.[/bold green]")
             else:
                 self.call_from_thread(log.write, f"[bold red]Update failed (exit code {proc.returncode})[/bold red]")
         except Exception as e:
             self.call_from_thread(log.write, f"[bold red]Error: {e}[/bold red]")
+
+    def _apply_reload(self, sites, schedule):
+        self.sites_index = sites
+        self.schedule = schedule
+        self._update_status()
 
     def action_update_schedules(self):
         self._run_update()

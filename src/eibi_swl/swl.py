@@ -749,7 +749,9 @@ class SWLApp(App):
             self.bell()
             return
         target_name = f"{rd['station']} ({rd['freq']} kHz)"
-        fifo_line = f"{si['lat']},{si['lon']},{target_name}\n"
+        site_name = si.get("name", "") if si else ""
+        detail = f"{rd['station']}|{rd['freq']} kHz|{rd['itu']}|{site_name}|{rd['lng']}|{rd['target']}"
+        fifo_line = f"{si['lat']},{si['lon']},{target_name}|{detail}\n"
 
         # Try sending to existing azMap via FIFO
         try:

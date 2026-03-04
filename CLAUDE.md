@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SWL Tools is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
+SWL Tools (v1.0.0) is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
 
 ## Core Commands
 
@@ -39,10 +39,10 @@ Downloads the latest schedule data from EiBi for the specified season:
 - Three input fields: Frequency (kHz), Station (name search), and Update (schedule period)
   - Enter in frequency input → search by freq, auto-fills Station field with first result
   - Enter in station input → case-insensitive substring search, auto-fills Frequency field with first result
-  - Editing either search field clears the other (cross-fill guard via `_cross_filling` flag + timer)
+  - Editing either search field clears the other (via `Input.prevent(Input.Changed)`)
   - Enter in period input → download schedules; period validated with `^[ab]\d{2}$`
 - Results sorted: ON AIR first (by remaining time asc), then NEXT (by time-until asc), unparseable last
-  - `_sort_minutes()` helper computes sort key from time range and current UTC
+  - `compute_on_air()` returns sort_minutes as 4th value for sorting
 - Displays bearing and great-circle distance from user's QTH to each transmitter site
 - Uses `swlconfig.conf` for QTH coordinates (INI format with `[qth]` section: lat, lon, name)
 - Loads `transmitter-sites.json` for site lookups keyed by `(country, site_code)`

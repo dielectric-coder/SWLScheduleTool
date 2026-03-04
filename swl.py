@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+__version__ = "1.0.0"
+
 import os
 import sys
 import csv
@@ -13,7 +15,7 @@ from datetime import datetime, timezone
 from textual.app import App
 from textual.screen import ModalScreen
 from textual.widgets import Footer, Input, DataTable, Static, RichLog
-from textual.containers import Horizontal, Vertical
+from textual.containers import Container, Horizontal, Vertical
 from rich.text import Text
 from textual.reactive import reactive
 from textual import work
@@ -255,8 +257,6 @@ def compute_on_air(time_range, current_time):
     return dur_str, True, f"◄ ON AIR {rh:02d}h{rm:02d}", remain
 
 
-
-
 def resolve_site_info(row, sites_index):
     """Resolve transmitter site details. Returns dict with name, country, lat, lon or None."""
     country = row["itu"]
@@ -333,7 +333,6 @@ class DetailScreen(ModalScreen):
         self.detail_text = detail_text
 
     def compose(self):
-        from textual.containers import Container  # local import to avoid circular at module level
         with Container(id="detail-container"):
             with Container(id="detail-card"):
                 yield Static("Station Detail", id="detail-title")
@@ -518,7 +517,7 @@ class SWLApp(App):
     def _update_title(self):
         bar = self.query_one("#title-bar", Static)
         bar.update(
-            f"  SWL Dashboard          ⏰ {self.utc_display}    📍 {self.qth['name']}"
+            f"  SWL Dashboard v{__version__}     ⏰ {self.utc_display}    📍 {self.qth['name']}"
         )
 
     def _update_status(self):

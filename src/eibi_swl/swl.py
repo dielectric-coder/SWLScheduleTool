@@ -764,7 +764,10 @@ class SWLApp(App):
 
         try:
             subprocess.Popen(
-                ["azmap", str(si["lat"]), str(si["lon"]), "-t", target_name],
+                ["azmap",
+                 str(self.qth["lat"]), str(self.qth["lon"]),
+                 str(si["lat"]), str(si["lon"]),
+                 "-c", self.qth["name"], "-t", target_name],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )

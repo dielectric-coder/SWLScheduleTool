@@ -141,7 +141,7 @@ cp packaging/swl.desktop ~/.local/share/applications/
 - Station detail modal (Enter on row) with round blue border
 - DataTable with sortable columns, zebra stripes, row cursor
 - Key bindings: Enter to search/update, F5 to update schedules, m to show azMap, q/Escape to quit
-- **azMap IPC** (`m` key): sends target coordinates to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen`. Wire format: `lat,lon,name\n` (e.g. `12.6833,-8.0333,CRI-Bamako (5995 kHz)\n`). This allows updating the azMap target in-place without spawning a new window each time.
+- **azMap IPC** (`m` key): sends target coordinates to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon from `swlconfig.conf` as center, transmitter site lat/lon as target, plus `-c` (QTH name) and `-t` (station name) flags. This ensures azMap always uses the same QTH coordinates as the dashboard for consistent distance/bearing calculations. Wire format for FIFO: `lat,lon,name\n` (e.g. `12.6833,-8.0333,CRI-Bamako (5995 kHz)\n`). This allows updating the azMap target in-place without spawning a new window each time.
 
 **src/eibi_swl/checksked.py** - Query tool for checking active broadcasts
 - Reads `swl-schedules-data/sked-current.csv` (semicolon-delimited CSV)

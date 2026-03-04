@@ -784,616 +784,623 @@
     "lon": -25.1583
   },
   {
-    "country": "AZR",
+    "country": "B",
+    "site_code": "a",
+    "name": "Porto Alegre, RS",
+    "lat": -30.0236,
+    "lon": -51.2553
+  },
+  {
+    "country": "B",
     "site_code": "ag",
     "name": "Araguaína, TO",
     "lat": -7.2,
     "lon": -48.2
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "am",
     "name": "Amparo, SP",
     "lat": -22.7,
     "lon": -46.7667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "an",
     "name": "Anápolis, GO",
     "lat": -16.2569,
     "lon": -49.0189
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ap",
     "name": "Aparecida, SP",
     "lat": -22.8464,
     "lon": -45.2203
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ar",
     "name": "Araraquara, SP",
     "lat": -21.8,
     "lon": -48.1833
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "b",
     "name": "Brasilia, Parque do Rodeador, DF",
     "lat": -15.6111,
     "lon": -48.1314
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "be",
     "name": "Belém, PA",
     "lat": -1.45,
     "lon": -48.4833
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "bh",
     "name": "Belo Horizonte, Minas Gerais",
     "lat": -19.9167,
     "lon": -43.9333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "br",
     "name": "Braganca, PA",
     "lat": -1.0633,
     "lon": -46.7733
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "bt",
     "name": "Belém, PA (Ondas Tropicais 5045)",
     "lat": -1.3667,
     "lon": -48.35
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "bv",
     "name": "Boa Vista, RR",
     "lat": 2.9219,
     "lon": -60.7106
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "c",
     "name": "Contagem/Belo Horizonte, MG",
     "lat": -19.8997,
     "lon": -44.0544
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ca",
     "name": "Campo Largo (Curitiba), PR",
     "lat": -25.43,
     "lon": -49.3969
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cb",
     "name": "Camboriú, SC",
     "lat": -27.0403,
     "lon": -48.6547
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cc",
     "name": "Cáceres, MT",
     "lat": -16.0767,
     "lon": -57.6408
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cg",
     "name": "Campo Grande, MS",
     "lat": -20.52,
     "lon": -54.5833
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "Cg",
     "name": "Campo Grande, MS",
     "lat": -20.45,
     "lon": -54.6167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cm",
     "name": "Campinas, SP",
     "lat": -22.9478,
     "lon": -47.0181
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cn",
     "name": "Congonhas, MG",
     "lat": -20.5,
     "lon": -43.8667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "co",
     "name": "Coari, AM",
     "lat": -4.1164,
     "lon": -63.1253
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cp",
     "name": "Cachoeira Paulista, SP",
     "lat": -22.6458,
     "lon": -45.0783
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "Cp",
     "name": "Cachoeira Paulista, SP",
     "lat": -22.6442,
     "lon": -45.0772
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cs",
     "name": "Cruzeiro do Sul, Estrada do Aeroporto, AC",
     "lat": -7.6333,
     "lon": -72.6667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cu",
     "name": "Curitiba, PR",
     "lat": -25.4522,
     "lon": -49.1139
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "cv",
     "name": "Cuiabá, MT",
     "lat": -15.6186,
     "lon": -56.0978
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "c2",
     "name": "Curitiba, PR RB2",
     "lat": -25.3928,
     "lon": -49.1678
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "E",
     "name": "Esteio (Porto Alegre), RS",
     "lat": -29.8281,
     "lon": -51.165
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "e",
     "name": "Esteio (Porto Alegre), RS",
     "lat": -29.8664,
     "lon": -51.1031
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "f",
     "name": "Foz do Iguacu, PR",
     "lat": -25.5175,
     "lon": -54.5083
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "fl",
     "name": "Florianópolis, SC",
     "lat": -27.6025,
     "lon": -48.5308
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "fp",
     "name": "Florianópolis - Comboriú, SC",
     "lat": -27.04,
     "lon": -48.6547
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "g",
     "name": "Guarujá, SP",
     "lat": -23.9931,
     "lon": -46.2564
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "gb",
     "name": "Guaíba (Porto Alegre), RS",
     "lat": -29.9972,
     "lon": -51.2856
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "gc",
     "name": "Sao Gabriel de Cachoeira, AM",
     "lat": -0.1333,
     "lon": -67.0833
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "gm",
     "name": "Guajará-Mirim, RO",
     "lat": -10.7833,
     "lon": -65.3333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "go",
     "name": "Goiânia,",
     "lat": -16.6583,
     "lon": -49.2272
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "gu",
     "name": "Guarulhos, SP",
     "lat": -23.4333,
     "lon": -46.4167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "h",
     "name": "Belo Horizonte, MG",
     "lat": -19.9761,
     "lon": -43.9333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ib",
     "name": "Ibitinga, SP",
     "lat": -21.7722,
     "lon": -48.8361
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "it",
     "name": "Itapevi, SP",
     "lat": -23.5108,
     "lon": -46.6761
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ld",
     "name": "Londrina, PR",
     "lat": -23.3378,
     "lon": -51.2217
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "li",
     "name": "Limeira, SP",
     "lat": -22.5608,
     "lon": -47.4189
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "lj",
     "name": "Lajeado, RS",
     "lat": -29.4667,
     "lon": -51.9667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "lo",
     "name": "Londrina, PR",
     "lat": -23.4047,
     "lon": -51.1553
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "m",
     "name": "Manaus AM",
     "lat": -3.1,
     "lon": -60.0333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ma",
     "name": "Manaus - Radiodif.Amazonas, AM",
     "lat": -3.1378,
     "lon": -59.9814
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mc",
     "name": "Macapá, AP",
     "lat": 0.0639,
     "lon": -51.0389
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mg",
     "name": "Manaus - Radio Globo, AM",
     "lat": -3.1344,
     "lon": -59.9775
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mi",
     "name": "Marília, SP",
     "lat": -22.2258,
     "lon": -49.9628
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mm",
     "name": "São Mateus do Maranhão, Maranhão",
     "lat": -4.0333,
     "lon": -44.4667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mo",
     "name": "Mogi das Cruces, SP",
     "lat": -23.5153,
     "lon": -46.2022
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mp",
     "name": "Mirandópolis, SP",
     "lat": -21.1333,
     "lon": -51.1
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "mr",
     "name": "Manaus - Radio Rio Mar, AM",
     "lat": -3.1217,
     "lon": -60.0417
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ob",
     "name": "Óbidos, PA",
     "lat": -1.9167,
     "lon": -55.5167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "os",
     "name": "Osasco, SP",
     "lat": -23.5142,
     "lon": -46.5942
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "pa",
     "name": "Parintins, AM",
     "lat": -2.6167,
     "lon": -56.75
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "pc",
     "name": "Pocos da Caldas, MG",
     "lat": -21.7978,
     "lon": -46.5406
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "pe",
     "name": "Petrolina, PE",
     "lat": -9.4,
     "lon": -40.5
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "pi",
     "name": "Piraquara (Curitiba), PR",
     "lat": -25.3928,
     "lon": -49.1678
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "pv",
     "name": "Porto Velho, RO",
     "lat": -8.7958,
     "lon": -63.7772
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "r",
     "name": "Rio de Janeiro (Radio Globo), RJ",
     "lat": -22.8233,
     "lon": -43.0969
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rb",
     "name": "Rio Branco, AC",
     "lat": -9.9667,
     "lon": -67.8167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rc",
     "name": "Rio de Janeiro (Radio Capital), RJ",
     "lat": -22.7786,
     "lon": -43.0156
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "re",
     "name": "Recife, PE",
     "lat": -8.0667,
     "lon": -34.9667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rj",
     "name": "Rio de Janeiro (Radio Relogio), RJ",
     "lat": -22.7781,
     "lon": -42.9839
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ro",
     "name": "Rio de Janeiro, Observatório Nacional,",
     "lat": -22.8958,
     "lon": -43.2242
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rp",
     "name": "Ribeirão Preto, SP",
     "lat": -21.1833,
     "lon": -47.8
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rs",
     "name": "Rio de Janeiro (Super Radio), RJ",
     "lat": -22.8228,
     "lon": -43.0892
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "rw",
     "name": "Rio de Janeiro PWZ",
     "lat": -22.95,
     "lon": -42.9167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sa",
     "name": "Santarém, PA",
     "lat": -2.4486,
     "lon": -54.7328
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sb",
     "name": "Sao Paulo - Radio Bandeirantes, SP",
     "lat": -23.6483,
     "lon": -46.6006
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sc",
     "name": "Sao Paulo - Radio Cultura, SP",
     "lat": -23.5117,
     "lon": -46.5614
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "se",
     "name": "Senador Guiomard, AC",
     "lat": -10.05,
     "lon": -67.6167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sg",
     "name": "Sao Paulo - Radio Globo, SP",
     "lat": -23.6072,
     "lon": -46.4367
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sj",
     "name": "Sao Paulo - Radio 9 de Julho, SP",
     "lat": -23.5475,
     "lon": -46.6361
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sm",
     "name": "Santa Maria, RS",
     "lat": -29.7383,
     "lon": -53.5553
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "so",
     "name": "Sorocaba, SP / Votorantim,",
     "lat": -23.55,
     "lon": -47.4333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sr",
     "name": "Sao Paulo - Radio Record, SP",
     "lat": -23.6839,
     "lon": -46.7431
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sy",
     "name": "Sao Paulo PYB45",
     "lat": -23.55,
     "lon": -46.6333
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "sz",
     "name": "Sao Paulo - Radio Gazeta, SP",
     "lat": -23.6694,
     "lon": -46.75
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "ta",
     "name": "Taubaté, SP",
     "lat": -23.0167,
     "lon": -45.5667
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "te",
     "name": "Teresina, PI",
     "lat": -5.0869,
     "lon": -42.7608
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "tf",
     "name": "Tefé, AM",
     "lat": -3.3542,
     "lon": -64.7114
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "vi",
     "name": "Vitória, ES",
     "lat": -20.3167,
     "lon": -40.3167
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "x",
     "name": "Xapuri, AC",
     "lat": -10.65,
     "lon": -68.5
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "xm",
     "name": "Unknown location in Maranhão,",
     "lat": -2.5,
     "lon": -44.25
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "xn",
     "name": "Unknown location in Paraná,",
     "lat": -25.0,
     "lon": -52.0
   },
   {
-    "country": "AZR",
+    "country": "B",
     "site_code": "xp",
     "name": "Unknown location in Paraíba,",
     "lat": -7.1667,
@@ -2961,273 +2968,280 @@
     "lon": 12.3833
   },
   {
-    "country": "CZE",
+    "country": "D",
+    "site_code": "al",
+    "name": "Albersloh",
+    "lat": 51.8864,
+    "lon": 7.7219
+  },
+  {
+    "country": "D",
     "site_code": "b",
     "name": "Biblis",
     "lat": 49.6883,
     "lon": 8.4922
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "be",
     "name": "Berlin-Britz",
     "lat": 52.45,
     "lon": 13.4333
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "bl",
     "name": "Berlin",
     "lat": 52.5167,
     "lon": 13.3833
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "br",
     "name": "Braunschweig",
     "lat": 52.2833,
     "lon": 10.7167
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "bu",
     "name": "Burg",
     "lat": 52.2869,
     "lon": 11.8969
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "bv",
     "name": "Bonn-Venusberg",
     "lat": 50.7081,
     "lon": 7.0967
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "cx",
     "name": "Cuxhaven-Sahlenburg",
     "lat": 53.8639,
     "lon": 8.6256
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "d",
     "name": "Dillberg",
     "lat": 49.3167,
     "lon": 11.3833
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "dd",
     "name": "Dresden-Wilsdruff",
     "lat": 51.0586,
     "lon": 13.5075
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "dt",
     "name": "Datteln",
     "lat": 51.65,
     "lon": 7.35
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "e",
     "name": "Erlangen-Tennenlohe",
     "lat": 49.5833,
     "lon": 11.0
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "fl",
     "name": "Flensburg",
     "lat": 54.7917,
     "lon": 9.5033
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "g",
     "name": "Goehren",
     "lat": 53.5356,
     "lon": 11.6111
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "ge",
     "name": "Gera",
     "lat": 50.8833,
     "lon": 12.0833
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "gl",
     "name": "Glücksburg",
     "lat": 54.8333,
     "lon": 9.5
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "ha",
     "name": "Hannover",
     "lat": 52.3833,
     "lon": 9.7
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "hc",
     "name": "Hamburg-Curslack",
     "lat": 53.45,
     "lon": 10.2167
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "he",
     "name": "Hannover/Hemmingen",
     "lat": 52.3278,
     "lon": 9.7367
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "hh",
     "name": "Hamburg-Moorfleet",
     "lat": 53.5192,
     "lon": 10.1028
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "ht",
     "name": "Hartenstein (Sachsen)",
     "lat": 50.6667,
     "lon": 12.6667
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "jr",
     "name": "Juliusruh",
     "lat": 54.6292,
     "lon": 13.3739
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "k",
     "name": "Kall-Krekel",
     "lat": 50.4781,
     "lon": 6.5231
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "L",
     "name": "Lampertheim",
     "lat": 49.6047,
     "lon": 8.5389
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "la",
     "name": "Langenberg",
     "lat": 51.3561,
     "lon": 7.1342
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "li",
     "name": "Lingen",
     "lat": 52.535,
     "lon": 7.3531
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "mf",
     "name": "Mainflingen",
     "lat": 50.0156,
     "lon": 9.0119
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "n",
     "name": "Nauen",
     "lat": 52.6486,
     "lon": 12.9092
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "nh",
     "name": "Neuharlingersiel DHJ59",
     "lat": 53.6764,
     "lon": 7.6125
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "nu",
     "name": "Nuernberg",
     "lat": 49.45,
     "lon": 11.0833
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "or",
     "name": "Oranienburg",
     "lat": 52.7833,
     "lon": 13.3833
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "pi",
     "name": "Pinneberg",
     "lat": 53.6731,
     "lon": 9.8083
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "r",
     "name": "Rohrbach",
     "lat": 48.6,
     "lon": 11.55
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "rf",
     "name": "Rhauderfehn",
     "lat": 53.0833,
     "lon": 7.6167
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "s",
     "name": "Stade",
     "lat": 53.6,
     "lon": 9.4667
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "w",
     "name": "Wertachtal",
     "lat": 48.0869,
     "lon": 10.695
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "wa",
     "name": "Winsen (Aller)",
     "lat": 52.6667,
     "lon": 9.7667
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "wb",
     "name": "Wachenbrunn",
     "lat": 50.4856,
     "lon": 10.5583
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "we",
     "name": "Weenermoor",
     "lat": 53.2,
     "lon": 7.3167
   },
   {
-    "country": "CZE",
+    "country": "D",
     "site_code": "wh",
     "name": "Waldheim",
     "lat": 51.0667,
@@ -3353,175 +3367,182 @@
     "lon": -69.8833
   },
   {
-    "country": "DOM",
+    "country": "E",
+    "site_code": "af",
+    "name": "Alfabia (Mallorca)",
+    "lat": 39.7375,
+    "lon": 2.7181
+  },
+  {
+    "country": "E",
     "site_code": "ag",
     "name": "Aguilas",
     "lat": 37.4903,
     "lon": -1.5633
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "ar",
     "name": "Ares",
     "lat": 43.4528,
     "lon": -8.2833
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "as",
     "name": "La Asomada",
     "lat": 37.63,
     "lon": -0.9633
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "bo",
     "name": "Boal",
     "lat": 43.4564,
     "lon": -6.8206
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "c",
     "name": "Coruna",
     "lat": 43.3669,
     "lon": -8.4519
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "cg",
     "name": "Cabo de Gata - Sabinar",
     "lat": 37.2081,
     "lon": -7.0183
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "cp",
     "name": "Chipiona",
     "lat": 36.6667,
     "lon": -6.4
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "fi",
     "name": "Finisterre",
     "lat": 42.9,
     "lon": -9.2667
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "gm",
     "name": "Torreta de Guardamar, Guardamar del Segura",
     "lat": 38.0717,
     "lon": -0.6647
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "h",
     "name": "Huelva",
     "lat": 37.2,
     "lon": -7.0167
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "hv",
     "name": "\"Huelva\"",
     "lat": 43.3447,
     "lon": -1.8558
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "jq",
     "name": "Jaizquibel",
     "lat": 43.3447,
     "lon": -1.8558
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "ma",
     "name": "Madrid",
     "lat": 40.4667,
     "lon": -3.6667
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "mu",
     "name": "Muxía",
     "lat": 43.0772,
     "lon": -9.225
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "mx",
     "name": "Marratxí",
     "lat": 39.6347,
     "lon": 2.67
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "n",
     "name": "Noblejas",
     "lat": 39.95,
     "lon": -3.4333
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "pm",
     "name": "Palma de Mallorca",
     "lat": 39.3667,
     "lon": 2.7833
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "pz",
     "name": "Pastoriza",
     "lat": 42.3431,
     "lon": -8.7192
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "rq",
     "name": "Roquetas",
     "lat": 36.2661,
     "lon": -6.0133
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "rs",
     "name": "Rostrío/Cabo de Peñas",
     "lat": 43.4783,
     "lon": -5.8503
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "sb",
     "name": "Sabiner",
     "lat": 36.6833,
     "lon": -2.7
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "ta",
     "name": "Tarifa",
     "lat": 36.05,
     "lon": -5.55
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "tj",
     "name": "Trijueque",
     "lat": 40.7786,
     "lon": -2.9853
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "to",
     "name": "Torrejón de Ardoz (Pegaso, Pavon, Brujo)",
     "lat": 40.5,
     "lon": -3.45
   },
   {
-    "country": "DOM",
+    "country": "E",
     "site_code": "vj",
     "name": "Vejer",
     "lat": 43.4783,
@@ -3717,154 +3738,161 @@
     "lon": 40.0
   },
   {
-    "country": "ETH",
+    "country": "F",
+    "site_code": "a",
+    "name": "Allouis",
+    "lat": 47.1667,
+    "lon": 2.2
+  },
+  {
+    "country": "F",
     "site_code": "au",
     "name": "Auros",
     "lat": 44.5,
     "lon": -0.15
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "av",
     "name": "Avord",
     "lat": 47.05,
     "lon": 2.4667
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "br",
     "name": "FUE Brest",
     "lat": 48.4258,
     "lon": -4.2408
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "cm",
     "name": "Col de la Madone",
     "lat": 43.7833,
     "lon": 7.4167
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "co",
     "name": "Corsen",
     "lat": 48.4167,
     "lon": -4.7833
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "g",
     "name": "La Garde (Toulon)",
     "lat": 43.1053,
     "lon": 5.9892
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "gn",
     "name": "Gris-Nez",
     "lat": 50.8667,
     "lon": 1.5833
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "hy",
     "name": "Hyères Island",
     "lat": 42.9844,
     "lon": 6.2067
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "i",
     "name": "Issoudun",
     "lat": 46.9333,
     "lon": 1.9
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "jb",
     "name": "Jobourg",
     "lat": 49.6847,
     "lon": -1.9078
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "ma",
     "name": "Mont Angel/Fontbonne",
     "lat": 43.7667,
     "lon": 7.425
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "oe",
     "name": "Ouessant",
     "lat": 48.4667,
     "lon": -5.05
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "p",
     "name": "Paris",
     "lat": 48.8667,
     "lon": 2.3
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "r",
     "name": "Rennes",
     "lat": 48.1,
     "lon": -1.6833
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "ro",
     "name": "Roumoules",
     "lat": 43.7833,
     "lon": 6.15
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "sa",
     "name": "FUG Saissac (11)",
     "lat": 43.3903,
     "lon": 2.0997
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "sb",
     "name": "Strasbourg",
     "lat": 48.2497,
     "lon": 7.4436
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "sg",
     "name": "Saint Guénolé",
     "lat": 47.8167,
     "lon": -4.3833
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "to",
     "name": "FUO Toulon",
     "lat": 43.1356,
     "lon": 6.0597
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "v",
     "name": "Favières FAV",
     "lat": 48.5333,
     "lon": 1.2333
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "ve",
     "name": "Vernon",
     "lat": 49.0833,
     "lon": 1.5
   },
   {
-    "country": "ETH",
+    "country": "F",
     "site_code": "wu",
     "name": "Rosnay (HWU)",
     "lat": 46.7167,
@@ -3976,266 +4004,273 @@
     "lon": 158.2
   },
   {
-    "country": "FSM",
+    "country": "G",
+    "site_code": "ab",
+    "name": "Aberdeen (Gregness)",
+    "lat": 57.1275,
+    "lon": -2.0536
+  },
+  {
+    "country": "G",
     "site_code": "aq",
     "name": "Aberdeen (Blaikie's Quay)",
     "lat": 57.1444,
     "lon": -2.0878
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "an",
     "name": "Anthorn",
     "lat": 54.9111,
     "lon": -3.2806
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ba",
     "name": "Bangor (No.Ireland)",
     "lat": 54.6642,
     "lon": -5.6689
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "bd",
     "name": "Bridlington (East Yorkshire)",
     "lat": 54.0939,
     "lon": -0.1758
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "cf",
     "name": "Collafirth Hill (Shetland)",
     "lat": 60.5333,
     "lon": -1.3917
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "cm",
     "name": "Crimond (Aberdeenshire)",
     "lat": 57.6167,
     "lon": -1.8833
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "cp",
     "name": "London-Crystal Palace",
     "lat": 51.4167,
     "lon": -0.0833
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "cr",
     "name": "London-Croydon",
     "lat": 51.4167,
     "lon": -0.0833
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ct",
     "name": "Croughton (Northants)",
     "lat": 51.9972,
     "lon": -1.2092
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "cu",
     "name": "Cullercoats, Newcastle",
     "lat": 55.0747,
     "lon": -1.4631
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "d",
     "name": "Droitwich",
     "lat": 52.3,
     "lon": -2.1
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "dv",
     "name": "Dover",
     "lat": 51.1331,
     "lon": 1.3433
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ev",
     "name": "St.Eval (Cornwall)",
     "lat": 50.4833,
     "lon": -5.0
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "fh",
     "name": "Fareham (Hampshire)",
     "lat": 50.8583,
     "lon": -1.2497
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "fl",
     "name": "Falmouth Coastguard",
     "lat": 50.1453,
     "lon": -5.0456
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "fm",
     "name": "Falmouth (Lizard)",
     "lat": 49.9603,
     "lon": -5.2017
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "hh",
     "name": "Holyhead (Isle of Anglesey, Wales)",
     "lat": 53.3164,
     "lon": -4.6325
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "hu",
     "name": "Humber (Flamborough)",
     "lat": 54.1167,
     "lon": -0.0781
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ic",
     "name": "one of: Inskip (Lancashire)",
     "lat": 53.8333,
     "lon": -2.8333
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "in",
     "name": "Inskip (Lancashire)",
     "lat": 53.8333,
     "lon": -2.8333
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "lo",
     "name": "London",
     "lat": 51.5,
     "lon": -0.1833
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "lw",
     "name": "Lerwick (Shetland)",
     "lat": 60.1486,
     "lon": -1.1403
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "mh",
     "name": "Milford Haven, Wales",
     "lat": 51.7078,
     "lon": -5.0525
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ni",
     "name": "Niton Navtex, Isle of Wight",
     "lat": 50.5864,
     "lon": -1.2547
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "nw",
     "name": "Northwood",
     "lat": 51.5,
     "lon": -0.1667
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "o",
     "name": "Orfordness",
     "lat": 52.1,
     "lon": 1.5833
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "p",
     "name": "Portland",
     "lat": 50.6,
     "lon": -2.45
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "pp",
     "name": "Portpatrick Navtex (Dumfries and Galloway)",
     "lat": 54.8442,
     "lon": -5.1244
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "r",
     "name": "Rampisham",
     "lat": 50.8083,
     "lon": -2.6431
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "s",
     "name": "Skelton",
     "lat": 54.7333,
     "lon": -2.9
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "sc",
     "name": "Shetland (Lerwick)",
     "lat": 60.4017,
     "lon": -1.2242
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "sm",
     "name": "St Mary's (Isles of Scilly)",
     "lat": 49.9289,
     "lon": -6.3039
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "sp",
     "name": "Saint Peter Port (Guernsey)",
     "lat": 49.45,
     "lon": -2.5333
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "st",
     "name": "Stornoway (Butt of Lewis)",
     "lat": 58.4614,
     "lon": -6.2311
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "sw",
     "name": "Stornoway port",
     "lat": 58.2033,
     "lon": -6.3756
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "ti",
     "name": "Tiree (Inner Hebrides)",
     "lat": 56.5,
     "lon": -6.8069
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "w",
     "name": "Woofferton",
     "lat": 52.3167,
     "lon": -2.7167
   },
   {
-    "country": "FSM",
+    "country": "G",
     "site_code": "wa",
     "name": "Washford (Somerset)",
     "lat": 51.1606,
@@ -4669,217 +4704,224 @@
     "lon": -158.1531
   },
   {
-    "country": "HWA",
+    "country": "I",
+    "site_code": "a",
+    "name": "Andrate",
+    "lat": 45.5167,
+    "lon": 7.8833
+  },
+  {
+    "country": "I",
     "site_code": "ac",
     "name": "Ancona IDR",
     "lat": 43.6111,
     "lon": 13.5258
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "an",
     "name": "Ancona IPA",
     "lat": 43.6031,
     "lon": 13.4706
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "au",
     "name": "Augusta IQA (Sicily)",
     "lat": 37.2372,
     "lon": 15.2406
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "b",
     "name": "San Benedetto de Tronto IQP",
     "lat": 42.9708,
     "lon": 13.8653
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "ba",
     "name": "Bari IPB",
     "lat": 41.0892,
     "lon": 16.9956
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "cg",
     "name": "Cagliari IDC (Sardinia)",
     "lat": 39.2278,
     "lon": 9.2344
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "cm",
     "name": "Cagliari IDR",
     "lat": 39.1919,
     "lon": 9.1456
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "cv",
     "name": "Civitavecchia IPD",
     "lat": 42.0333,
     "lon": 11.8333
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "ge",
     "name": "Genova ICB",
     "lat": 44.4292,
     "lon": 8.9331
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "kr",
     "name": "Crotone IPC",
     "lat": 39.05,
     "lon": 17.1333
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "li",
     "name": "Livorno-Montenero IPL",
     "lat": 43.4903,
     "lon": 10.3608
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "lm",
     "name": "Lampedusa-Ponente IQN",
     "lat": 35.5175,
     "lon": 12.5661
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "ls",
     "name": "La Spazia IDR",
     "lat": 44.0833,
     "lon": 9.8167
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "me",
     "name": "Messina IDF (Sicily)",
     "lat": 38.2683,
     "lon": 15.6219
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "mp",
     "name": "Monteparano (IPC)",
     "lat": 40.4419,
     "lon": 17.4189
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "mz",
     "name": "Mazara del Vallo IQQ",
     "lat": 37.67,
     "lon": 12.6131
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "na",
     "name": "Napoli-Posillipo IQH",
     "lat": 40.8006,
     "lon": 14.1833
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "p",
     "name": "Padova",
     "lat": 45.15,
     "lon": 11.7
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "pa",
     "name": "Palermo-Punta Raisi IPP (Sicily)",
     "lat": 38.19,
     "lon": 13.1083
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "pi",
     "name": "San Pietro island IDR",
     "lat": 40.4478,
     "lon": 17.1611
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "pt",
     "name": "Porto Torres IZN (Sardinia)",
     "lat": 40.7978,
     "lon": 8.3253
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "r",
     "name": "Roma",
     "lat": 41.8,
     "lon": 12.5167
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "ra",
     "name": "Roma IMB",
     "lat": 41.7833,
     "lon": 12.4667
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "re",
     "name": "Rome",
     "lat": 41.9167,
     "lon": 12.4833
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "sa",
     "name": "Sant'Anna d'Alfaedo IDR",
     "lat": 45.6278,
     "lon": 10.9458
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "si",
     "name": "Sigonella (Sicilia)",
     "lat": 37.4,
     "lon": 14.9167
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "sp",
     "name": "Santa Panagia/Siracusa IDR (Sicilia)",
     "lat": 37.1,
     "lon": 15.2833
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "sr",
     "name": "Santa Rosa (IDR Maritele), Roma",
     "lat": 41.9833,
     "lon": 12.3667
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "sy",
     "name": "NSY",
     "lat": 37.1167,
     "lon": 14.4333
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "t",
     "name": "Trieste (Monte Radio) IQX",
     "lat": 45.6767,
     "lon": 13.7692
   },
   {
-    "country": "HWA",
+    "country": "I",
     "site_code": "v",
     "name": "Viareggio, Toscana",
     "lat": 43.9,
@@ -6510,378 +6552,385 @@
     "lon": 34.75
   },
   {
-    "country": "ISR",
+    "country": "J",
+    "site_code": "ao",
+    "name": "Aonoyama Signal Station, Utazu (Kagawa)",
+    "lat": 34.3,
+    "lon": 133.8167
+  },
+  {
+    "country": "J",
     "site_code": "as",
     "name": "Asahikawa AF JJU22",
     "lat": 43.8,
     "lon": 142.3667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ay",
     "name": "Ashiya AB JJZ59",
     "lat": 33.8833,
     "lon": 130.65
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "c",
     "name": "Chiba Nagara",
     "lat": 35.4667,
     "lon": 140.2167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ct",
     "name": "Chitose AB, Hokkaido JJR20",
     "lat": 42.8,
     "lon": 141.6667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "es",
     "name": "Esaki Signal Station (Osaka Bay), Awaji island (Hyogo)",
     "lat": 34.5983,
     "lon": 134.9922
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "f",
     "name": "Chofu Campus, Tokyo",
     "lat": 35.65,
     "lon": 139.55
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "fu",
     "name": "Fuchu AB JJT55",
     "lat": 35.6833,
     "lon": 139.5
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "gf",
     "name": "Gifu AB JJV67",
     "lat": 35.4,
     "lon": 136.8667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "h",
     "name": "Mount Hagane",
     "lat": 33.465,
     "lon": 130.1756
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "hf",
     "name": "Hofu / Bofu AB JJX36",
     "lat": 34.0333,
     "lon": 131.55
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "hm",
     "name": "Hamamatsu AB JJV56",
     "lat": 34.75,
     "lon": 137.7
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "hy",
     "name": "Hyakurigahara AB JJT33",
     "lat": 36.1833,
     "lon": 140.4167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "io",
     "name": "Imabari Ohama Vessel Station (Kurushima), Imabari (Ehime)",
     "lat": 34.0903,
     "lon": 132.9878
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ir",
     "name": "Iruma / Irumagawa AB JJT44",
     "lat": 35.85,
     "lon": 139.4167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "it",
     "name": "Itoman, Okinawa JFE",
     "lat": 26.15,
     "lon": 127.6667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "iw",
     "name": "Isewan Signal Station, Cape Irago, Tahara (Aichi)",
     "lat": 34.5833,
     "lon": 137.0167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "k",
     "name": "Kagoshima JMH",
     "lat": 31.3167,
     "lon": 130.5167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "kg",
     "name": "Kumagaya AB JJT66",
     "lat": 36.1667,
     "lon": 139.3167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ki",
     "name": "Kisarazu AB JJT22",
     "lat": 35.4,
     "lon": 139.9167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "kk",
     "name": "Komaki AB (Nagoya) JJV23",
     "lat": 35.25,
     "lon": 136.9167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "km",
     "name": "Kume Shima / Kumejina, Okinawa JJU66",
     "lat": 26.3667,
     "lon": 126.7167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "kn",
     "name": "Kanmon Oseto Strait Signal Station,",
     "lat": 33.9167,
     "lon": 130.9333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ko",
     "name": "Komatsu AB JJV90",
     "lat": 36.4,
     "lon": 136.4
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ks",
     "name": "Kasuga AB JJZ37",
     "lat": 33.5333,
     "lon": 130.4667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ku",
     "name": "Kumamoto JJE20",
     "lat": 32.8333,
     "lon": 130.85
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ky",
     "name": "Kyodo",
     "lat": 36.1833,
     "lon": 139.85
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "kz",
     "name": "Kannonzaki Signal Station, Yokosuka (Kanagawa)",
     "lat": 35.2561,
     "lon": 139.7433
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "m",
     "name": "Miura",
     "lat": 35.1397,
     "lon": 139.6422
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "mh",
     "name": "Miho AB, Yonago JJX25",
     "lat": 35.5,
     "lon": 133.2333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ms",
     "name": "Misawa AB JJS21",
     "lat": 40.7,
     "lon": 141.3667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "mt",
     "name": "Matsushima AB JJS32",
     "lat": 38.4,
     "lon": 141.2167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "mu",
     "name": "Muroto (Kochi, Shikoku)",
     "lat": 33.2833,
     "lon": 134.15
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "mz",
     "name": "Makurazaki (Kagoshima, Kyushu)",
     "lat": 31.2667,
     "lon": 130.3
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "n",
     "name": "Nemuro",
     "lat": 43.3,
     "lon": 145.5667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "nh",
     "name": "Naha AB, Okinawa",
     "lat": 26.2,
     "lon": 127.65
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "nk",
     "name": "Nagoya Kinjo Signal Station, Nagoya (Aichi)",
     "lat": 35.035,
     "lon": 136.8464
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "nr",
     "name": "Nara JJW24",
     "lat": 34.5667,
     "lon": 135.7667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ny",
     "name": "Nyutabaru AB JJZ26",
     "lat": 32.0833,
     "lon": 131.45
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "o",
     "name": "Mount Otakadoya",
     "lat": 37.3728,
     "lon": 140.8489
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "oe",
     "name": "Okinoerabu JJZ44",
     "lat": 27.4333,
     "lon": 128.7
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ok",
     "name": "Okinawa",
     "lat": 26.4833,
     "lon": 127.9333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "os",
     "name": "Osaka JJD20",
     "lat": 34.7833,
     "lon": 135.4333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ot",
     "name": "Otaru, Hokkaido JJS65",
     "lat": 43.1833,
     "lon": 141.0
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "sa",
     "name": "Sapporo / Chitose AB JJA20",
     "lat": 42.7833,
     "lon": 141.6667
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "sg",
     "name": "Sodegaura (Kubota), Chiba",
     "lat": 35.4467,
     "lon": 140.0197
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "sn",
     "name": "Sendai / Kasuminome AB JJB20",
     "lat": 38.2333,
     "lon": 140.9167
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "sz",
     "name": "Shizuoka",
     "lat": 34.9833,
     "lon": 138.3833
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "tk",
     "name": "Tokyo / Tachikawa AF JJC20 JJT88",
     "lat": 35.7167,
     "lon": 139.4
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "ts",
     "name": "Tsuiki AB JJZ48",
     "lat": 33.6833,
     "lon": 131.0333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "tv",
     "name": "Tokyo Volmet, Kagoshima Broadcasting Station",
     "lat": 31.7167,
     "lon": 130.7333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "y",
     "name": "Yamata",
     "lat": 36.1667,
     "lon": 139.8333
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "yo",
     "name": "Yokota AFB",
     "lat": 35.7486,
     "lon": 139.3486
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "yz",
     "name": "Yozadake (Okinawa)",
     "lat": 26.1333,
     "lon": 127.7
   },
   {
-    "country": "ISR",
+    "country": "J",
     "site_code": "zz",
     "name": "Trading sites, licensed until 2027: Kubota 35N26'47\"N-140E01'11\"/Minami-Boso",
     "lat": 35.1147,
@@ -9947,70 +9996,77 @@
     "lon": 129.8058
   },
   {
-    "country": "RUS",
+    "country": "S",
+    "site_code": "b",
+    "name": "Bjuröklubb",
+    "lat": 64.4617,
+    "lon": 21.5917
+  },
+  {
+    "country": "S",
     "site_code": "d",
     "name": "Delsbo",
     "lat": 61.8,
     "lon": 16.55
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "gr",
     "name": "Varberg-Grimeton",
     "lat": 57.1083,
     "lon": 12.3933
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "gs",
     "name": "Gislövshammar",
     "lat": 55.4894,
     "lon": 14.3144
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "h",
     "name": "Härnösand",
     "lat": 62.7067,
     "lon": 18.1297
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "j",
     "name": "Julita",
     "lat": 59.1333,
     "lon": 16.05
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "k",
     "name": "Kvarnberget-Vallentuna",
     "lat": 59.5,
     "lon": 18.1333
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "s",
     "name": "Sala",
     "lat": 59.6069,
     "lon": 17.2122
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "st",
     "name": "Stavsnäs",
     "lat": 59.2833,
     "lon": 18.6833
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "t",
     "name": "Tingstäde",
     "lat": 57.7278,
     "lon": 18.5986
   },
   {
-    "country": "RUS",
+    "country": "S",
     "site_code": "v",
     "name": "Vaxholm, The Castle",
     "lat": 59.4,

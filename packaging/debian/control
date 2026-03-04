@@ -1,0 +1,22 @@
+Source: eibi-swl-dashboard
+Section: hamradio
+Priority: optional
+Maintainer: Michel Lachaine <mike@mikelachaine.ca>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               python3-all,
+               python3-setuptools,
+               pybuild-plugin-pyproject
+Standards-Version: 4.6.2
+Homepage: https://github.com/mikewam/swl-tools
+Rules-Requires-Root: no
+
+Package: eibi-swl-dashboard
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Recommends: python3-rich, python3-textual
+Description: Interactive TUI dashboard for shortwave listeners
+ SWL Tools provides an interactive terminal dashboard and CLI tools
+ for querying the EiBi shortwave broadcast schedule database. Features
+ include real-time ON AIR detection, bearing and distance from your
+ QTH, station detail modals, and integrated schedule updates.

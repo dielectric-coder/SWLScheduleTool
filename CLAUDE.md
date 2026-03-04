@@ -8,19 +8,25 @@ SWL Tools (v1.0.0) is a collection of Python utilities for shortwave listeners (
 
 ## Core Commands
 
+### Interactive TUI Dashboard
+```bash
+swl
+```
+Full-screen terminal dashboard with frequency search, station search, bearing/distance, and live UTC clock.
+
 ### Check Stations on a Frequency
 ```bash
-./checksked.py <frequency_in_kHz>
+checksked <frequency_in_kHz>
 ```
-Example: `./checksked.py 1170`
+Example: `checksked 1170`
 
 Displays all broadcasts on the specified frequency, highlighting currently active stations in green with remaining airtime.
 
 ### Update Schedule Data
 ```bash
-./updatesked.py <schedule_period>
+updatesked <schedule_period>
 ```
-Example: `./updatesked.py b25` or `./updatesked.py a25`
+Example: `updatesked b25` or `updatesked a25`
 
 Downloads the latest schedule data from EiBi for the specified season:
 - Format: `a` (summer) or `b` (winter) followed by 2-digit year
@@ -28,11 +34,48 @@ Downloads the latest schedule data from EiBi for the specified season:
 - Converts encoding from ISO-8859-1 to UTF-8
 - Updates files in `swl-schedules-data/` directory
 
+## Packaging
+
+### Project layout (src-layout)
+
+```
+src/eibi_swl/          # Python package installed to site-packages
+  __init__.py           # __version__ = "1.0.0"
+  _paths.py             # XDG path resolution (dev vs installed)
+  swl.py                # TUI dashboard
+  checksked.py          # CLI frequency query
+  updatesked.py         # Schedule downloader
+  swlconfig.conf.sample # Sample config for distribution
+  countrycode.dat       # ITU country codes
+  targetcode            # Target area codes
+  transmittersite       # Transmitter site locations
+  swl-schedules-data/   # Bundled schedule data (current files)
+```
+
+### Path resolution (`_paths.py`)
+
+| Install method | Schedules (writable) | User config |
+|---|---|---|
+| `pip install -e .` (dev) | `src/eibi_swl/swl-schedules-data/` | `src/eibi_swl/swlconfig.conf` |
+| `pip install` (system) | `~/.local/share/eibi-swl/` | `~/.config/eibi-swl/swlconfig.conf` |
+
+### Entry points (pyproject.toml)
+
+- `swl` → `eibi_swl.swl:main`
+- `checksked` → `eibi_swl.checksked:main`
+- `updatesked` → `eibi_swl.updatesked:main`
+
+### Build commands
+
+- `pip install -e .` — editable install for development
+- `python -m build` — build sdist + wheel
+- `cd packaging/archlinux && makepkg -si` — Arch Linux package
+
 ## Architecture
 
 ### Main Scripts
 
-**swl.py** - Interactive TUI dashboard (Textual)
+**src/eibi_swl/swl.py** - Interactive TUI dashboard (Textual)
 - Full-screen terminal UI with live UTC clock, frequency search, and schedule table
 - Tokyo Night theme with black background
 - Starship-style powerline input prompts (two-line `╭─░▒▓`/`╰─` segments with nerd font glyphs)
@@ -53,7 +96,7 @@ Downloads the latest schedule data from EiBi for the specified season:
 - DataTable with sortable columns, zebra stripes, row cursor
 - Key bindings: Enter to search/update, F5 to update schedules, q/Escape to quit
 
-**checksked.py** - Query tool for checking active broadcasts
+**src/eibi_swl/checksked.py** - Query tool for checking active broadcasts
 - Reads `swl-schedules-data/sked-current.csv` (semicolon-delimited CSV)
 - Parses broadcast time ranges and handles midnight-crossing broadcasts
 - Compares current UTC time against schedule entries
@@ -61,7 +104,7 @@ Downloads the latest schedule data from EiBi for the specified season:
 - Active broadcasts highlighted in bold green with `◄ ON AIR` indicator and remaining time
 - Uses latin-1 encoding to read CSV files
 
-**updatesked.py** - Schedule update tool
+**src/eibi_swl/updatesked.py** - Schedule update tool
 - Downloads schedule files from `http://eibispace.de/dx`
 - Processes three file types:
   - `sked-{period}.csv` → `sked-current.csv` (main schedule)
@@ -74,7 +117,7 @@ Downloads the latest schedule data from EiBi for the specified season:
   - `extract_transmitter_sites()` parses country codes, site codes, names, and coordinates
   - Handles multi-site entries, `except:` markers, and entries without coordinates
 
-### Data Files
+### Data Files (all under `src/eibi_swl/`)
 
 **swl-schedules-data/** - Schedule data directory
 - `sked-current.csv` - Active schedule data (CSV format, semicolon-delimited)
@@ -82,7 +125,7 @@ Downloads the latest schedule data from EiBi for the specified season:
 - `bc-current.dat` - Time-sorted broadcast list
 - `README-current.TXT` - EiBi documentation about data format and usage
 - `transmitter-sites.json` - Extracted transmitter sites with decimal lat/lon coordinates
-- Archived seasonal files: `sked-{a|b}##.csv`, `freq-{a|b}##.txt`, `bc-{a|b}##.txt`
+- Archived seasonal files kept in repo root `swl-schedules-data/`
 
 **countrycode.dat** - ITU country codes (binary format)
 
@@ -149,14 +192,9 @@ Read by `swl.py` using `configparser` (stdlib). Used for bearing/distance calcul
 
 ## Dependencies
 
-Python 3.x:
-- `sys`, `os`, `csv`, `datetime`, `rich` (checksked.py)
-- `sys`, `os`, `subprocess`, `urllib.request`, `shutil`, `re`, `json` (updatesked.py)
-- `os`, `sys`, `csv`, `json`, `configparser`, `subprocess`, `re`, `math`, `datetime`, `textual`, `rich` (swl.py)
-
-External Python packages:
-- `rich` - Terminal formatting (checksked.py, swl.py)
-- `textual` - TUI framework (swl.py) — install via `sudo pacman -S python-textual`
+Python >=3.10. External packages (auto-installed via `pip install eibi-swl-dashboard`):
+- `rich>=13.0` - Terminal formatting (checksked.py, swl.py)
+- `textual>=0.40` - TUI framework (swl.py)
 
 Optional external commands:
 - `cowsay` and `lolcat` - Used by updatesked.py for completion message (graceful fallback if unavailable)

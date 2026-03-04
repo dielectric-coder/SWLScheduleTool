@@ -1,2 +1,7 @@
 __pycache__/
 swlconfig.conf
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/

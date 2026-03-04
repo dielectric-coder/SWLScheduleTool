@@ -8,6 +8,8 @@ import shutil
 import re
 import json
 
+from eibi_swl._paths import resolve_data_dir
+
 def parse_dms_coord(coord_str):
     """Parse a single coordinate component like '34N32' or '26S07\\'40\"' to decimal degrees."""
     match = re.match(r"(\d+)([NSEW])(\d+)(?:'(\d+)(?:\")?)?", coord_str)
@@ -54,7 +56,7 @@ def extract_transmitter_sites(readme_path, output_path):
         stripped = line.rstrip()
 
         # Country header line: "   XXX: ..."
-        country_match = re.match(r'^   ([A-Z][A-Za-z0-9 ]{1,4}):\s*(.*)', stripped)
+        country_match = re.match(r'^   ([A-Z][A-Za-z0-9 ]{0,4}):\s*(.*)', stripped)
         if country_match:
             current_country = country_match.group(1).strip()
             rest = country_match.group(2).strip()
@@ -137,11 +139,8 @@ def _parse_multi_site(sites, country, site_code, rest, coord_matches):
 
 
 def main():
-    # Get the directory where this script is located
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    
     # Configuration
-    SCHED_DIR = os.path.join(script_dir, "swl-schedules-data")
+    SCHED_DIR = resolve_data_dir()
     BASE_URL = "http://eibispace.de/dx"
     
     # Create schedule directory if it doesn't exist

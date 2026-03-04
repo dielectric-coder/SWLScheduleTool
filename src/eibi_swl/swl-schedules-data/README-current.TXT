@@ -386,7 +386,7 @@ D) Codes used.
    KA    Karen (unspecified): Myanmar (3m)
    K-G   Karen-Geba: Myanmar (40,000)                                        [kvq]
    K-K   Karen-Geko / Gekho: Myanmar (17,000)                                [ghk]
-   K-M   Manumanaw Karen / Kawyaw / Kayah: Myanmar (10,000)                  [kxf]
+   K-M   Manumanaw Karen / Kawyaw / Kayah: Myanmar (10,000)          [kay]   [kxf]
    K-P   Karen-Pao / Black Karen / Pa'o: Myanmar (0.5m)                      [blk]
    K-S   Karen-Sgaw / S'gaw: Myanmar (1.3m), Thailand (0.2m)                 [ksw]
    K-W   Karen-Pwo: Myanmar (1m); Northern variant: Thailand (60,000)    [kjp,pww]
@@ -1895,7 +1895,7 @@ D) Codes used.
         go-Gorontalo port, Sulawesi 00N30'29"-123E03'49"
         gr-Gresik, Surabaya, Jawa Timur 07S09'51"-112E39'37"
         gs-Gunung Sitoli, Nias Island, Sumatera Utara 01N18'24"-97E36'35"
-        j-Jakarta (Cimanggis) 06S12-106E51
+        j-Jakarta (Cimanggis) 06S23'30"-106E51'40"
         ja-Jambi PKC3 01S36'50"-103E36'51"
         jb-Jakarta BMG 06S17-106E52
         jm-Jambi, Sumatera 01S38-103E34
@@ -1904,6 +1904,7 @@ D) Codes used.
         jw-Juwana, Jawa Tengah 06S42'15"-111E09'13"
         jx-Jakarta PKX 06S07'08"-106E51'15"
         jy-Jayapura, Papua 02S31'10"-140E43'22"
+        k-Kebayoran Baru, South Jakarta, Java 06S15'01"-106E47'29"
         ka-Kaimana, Papua 03S40-133E46
         kb-Kalabahi, Alor Island, East Nusa Tenggara 08S13'18"-124E30'40"
         kd-Kendari, Sulawesi Tenggara 03S59-122E36

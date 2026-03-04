@@ -9,10 +9,11 @@ from rich.table import Table
 from rich.panel import Panel
 from rich import box
 
+from eibi_swl._paths import resolve_data_dir
+
 def main():
     # Configuration
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    SCHED_DIR = os.path.join(script_dir, "swl-schedules-data")
+    SCHED_DIR = resolve_data_dir()
 
     try:
         term_width = max(os.get_terminal_size().columns, 110)

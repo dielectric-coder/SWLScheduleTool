@@ -22,20 +22,27 @@ This project provides utilities to query and display shortwave radio broadcast s
 
 ## Installation
 
-1. Clone the repository:
+### From PyPI
+
 ```bash
-git clone <repository-url>
+pip install eibi-swl-dashboard
+```
+
+This installs three commands: `swl`, `checksked`, and `updatesked`.
+
+### From source (development)
+
+```bash
+git clone https://github.com/mikewam/swl-tools.git
 cd swl-tools
+pip install -e .
 ```
 
-2. Ensure Python 3 is installed:
-```bash
-python3 --version
-```
+### Arch Linux
 
-3. Make the scripts executable:
 ```bash
-chmod +x checksked.py swl.py updatesked.py
+cd packaging/archlinux
+makepkg -si
 ```
 
 ## Configuration
@@ -56,7 +63,7 @@ This is used by `swl.py` to calculate bearing and distance to each transmitter s
 ### Interactive TUI Dashboard
 
 ```bash
-./swl.py
+swl
 ```
 
 Launches a full-screen terminal dashboard with:
@@ -73,12 +80,12 @@ Launches a full-screen terminal dashboard with:
 ### Check Stations on a Frequency
 
 ```bash
-./checksked.py <frequency_in_kHz>
+checksked <frequency_in_kHz>
 ```
 
 **Example:**
 ```bash
-./checksked.py 1170
+checksked 1170
 ```
 
 **Output:**
@@ -95,12 +102,12 @@ Stations en onde à la fréquence 1170 kHz en ce moment -> 14:46 UTC
 ### Update Schedule Data
 
 ```bash
-./updatesked.py <schedule_period>
+updatesked <schedule_period>
 ```
 
 **Example:**
 ```bash
-./updatesked.py b25
+updatesked b25
 ```
 
 Downloads the latest EiBi schedule data for the specified season (`a` = summer, `b` = winter, followed by 2-digit year). Also extracts transmitter site locations and coordinates into `transmitter-sites.json`:

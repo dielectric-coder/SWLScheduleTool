@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eibi-swl-dashboard"
+version = "1.0.0"
+description = "Interactive TUI dashboard and CLI tools for shortwave listeners using the EiBi broadcast schedule"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.10"
+authors = [
+    { name = "Michel Lachaine", email = "mike@mikelachaine.ca" },
+]
+keywords = ["shortwave", "radio", "swl", "eibi", "broadcast", "schedule", "tui"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications :: Ham Radio",
+]
+dependencies = [
+    "rich>=13.0",
+    "textual>=0.40",
+]
+
+[project.urls]
+Homepage = "https://github.com/mikewam/swl-tools"
+Issues = "https://github.com/mikewam/swl-tools/issues"
+
+[project.scripts]
+swl = "eibi_swl.swl:main"
+checksked = "eibi_swl.checksked:main"
+updatesked = "eibi_swl.updatesked:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+eibi_swl = [
+    "countrycode.dat",
+    "targetcode",
+    "transmittersite",
+    "swlconfig.conf.sample",
+    "swl-schedules-data/*.csv",
+    "swl-schedules-data/*.dat",
+    "swl-schedules-data/*.TXT",
+    "swl-schedules-data/*.json",
+]

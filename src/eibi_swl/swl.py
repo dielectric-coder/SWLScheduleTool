@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-__version__ = "1.0.0"
+from eibi_swl import __version__
+from eibi_swl._paths import resolve_data_dir, resolve_config
 
 import os
 import sys
@@ -22,8 +23,8 @@ from textual import work
 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-SCHED_DIR = os.path.join(SCRIPT_DIR, "swl-schedules-data")
-CONFIG_FILE = os.path.join(SCRIPT_DIR, "swlconfig.conf")
+SCHED_DIR = resolve_data_dir()
+CONFIG_FILE = resolve_config()
 SITES_JSON = os.path.join(SCHED_DIR, "transmitter-sites.json")
 SKED_CSV = os.path.join(SCHED_DIR, "sked-current.csv")
 COUNTRY_FILE = os.path.join(SCRIPT_DIR, "countrycode.dat")
@@ -735,7 +736,7 @@ class SWLApp(App):
 
         try:
             proc = subprocess.Popen(
-                [sys.executable, os.path.join(SCRIPT_DIR, "updatesked.py"), period],
+                [sys.executable, "-m", "eibi_swl.updatesked", period],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
@@ -764,6 +765,10 @@ class SWLApp(App):
         self._run_update()
 
 
-if __name__ == "__main__":
+def main():
     app = SWLApp()
     app.run()
+
+
+if __name__ == "__main__":
+    main()

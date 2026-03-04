@@ -364,6 +364,7 @@ Screen {
     height: 2;
     background: black;
     padding: 0 1;
+    align: center top;
 }
 
 #freq-prompt {
@@ -400,6 +401,7 @@ Screen {
 #schedule-table {
     height: 1fr;
     background: black;
+    border-top: solid #394260;
 }
 
 #status-bar {

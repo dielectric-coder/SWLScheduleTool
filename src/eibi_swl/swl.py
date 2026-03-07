@@ -10,6 +10,7 @@ import csv
 import json
 import re
 import configparser
+import socket
 import subprocess
 from math import radians, sin, cos, sqrt, atan2, degrees
 from datetime import datetime, timezone
@@ -263,6 +264,13 @@ def resolve_site_info(row, sites_index):
     return None
 
 
+class SWLDataTable(DataTable):
+    """DataTable with enter binding visible in footer."""
+    BINDINGS = [
+        ("enter", "select_cursor", "Detail"),
+    ]
+
+
 DETAIL_CSS = """
 #detail-container {
     align: center middle;
@@ -414,17 +422,18 @@ Screen {
 
 
 class SWLApp(App):
-    TITLE = "SWL Dashboard"
+    TITLE = f"SWL Tool v{__version__}"
     CSS = CSS
     theme = "tokyo-night"
     BINDINGS = [
         ("q", "quit", "Quit"),
         ("escape", "quit", "Quit"),
-        ("f5", "update_schedules", "Update Sked"),
         ("m", "show_map", "Map"),
+        ("t", "tune_radio", "Tune"),
         ("slash", "focus_search", "Search"),
         ("tab", "focus_next", "Next"),
         ("shift+tab", "focus_previous", "Prev"),
+        ("f5", "update_schedules", "Update Sked"),
     ]
 
     utc_display = reactive("--:-- UTC")
@@ -440,6 +449,10 @@ class SWLApp(App):
         self.target_names = load_target_names()
         self.language_names = load_language_names()
         self.displayed_rows = []
+        config = configparser.ConfigParser()
+        config.read(CONFIG_FILE)
+        self.radio_host = config.get("radio", "host", fallback="localhost")
+        self.radio_port = config.getint("radio", "port", fallback=4532)
 
     FREQ_LABEL = (
         "[#769ff0 on #394260]╭─[/]"
@@ -489,12 +502,18 @@ class SWLApp(App):
                 with Horizontal():
                     yield Static("[#769ff0 on #394260]╰─\uf10c[/]", classes="prompt-char")
                     yield Input(placeholder=self.qth["name"], id="qth-input")
-        yield DataTable(id="schedule-table")
+        yield SWLDataTable(id="schedule-table")
         yield RichLog(id="update-log", highlight=True, markup=True)
         yield Static(id="status-bar", markup=True)
         yield Footer()
 
     def on_mount(self):
+        try:
+            fd = os.open("/dev/tty", os.O_WRONLY)
+            os.write(fd, f"\033]0;SWL Tool v{__version__}\007".encode())
+            os.close(fd)
+        except OSError:
+            pass
         self._setup_table()
         self._update_title()
         self._update_status()
@@ -517,7 +536,7 @@ class SWLApp(App):
     def _update_title(self):
         bar = self.query_one("#title-bar", Static)
         bar.update(
-            f"  SWL Dashboard v{__version__}     ⏰ {self.utc_display}    📍 {self.qth['name']}"
+            f"  SWL Tool v{__version__}     ⏰ {self.utc_display}    📍 {self.qth['name']}"
         )
 
     def _update_status(self):
@@ -528,7 +547,7 @@ class SWLApp(App):
 
     def check_action(self, action, parameters):
         """Prevent quit/search bindings from firing while typing in the input."""
-        if action in ("quit", "focus_search") and isinstance(self.focused, Input):
+        if action in ("quit", "focus_search", "tune_radio") and isinstance(self.focused, Input):
             return None
         return True
 
@@ -799,6 +818,37 @@ class SWLApp(App):
                 stderr=subprocess.DEVNULL,
             )
         except FileNotFoundError:
+            self.bell()
+
+    def action_tune_radio(self):
+        """Send FA command to EladSpectrum CAT server to tune the radio."""
+        table = self.query_one(DataTable)
+        if not table.row_count or table.cursor_row is None:
+            self.bell()
+            return
+        try:
+            row_key = table.coordinate_to_cell_key(
+                (table.cursor_row, 0)).row_key
+            idx = int(str(row_key.value))
+        except (ValueError, TypeError):
+            self.bell()
+            return
+        if idx < 0 or idx >= len(self.displayed_rows):
+            self.bell()
+            return
+        rd = self.displayed_rows[idx]
+        try:
+            freq_hz = int(rd["freq"]) * 1000
+        except (ValueError, TypeError):
+            self.bell()
+            return
+        cmd = f"FA{freq_hz:011d};MD5;"
+        try:
+            with socket.create_connection(
+                (self.radio_host, self.radio_port), timeout=2
+            ) as sock:
+                sock.sendall(cmd.encode("ascii"))
+        except OSError:
             self.bell()
 
     @work(thread=True)

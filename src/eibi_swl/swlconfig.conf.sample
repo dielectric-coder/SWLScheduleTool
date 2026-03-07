@@ -10,3 +10,11 @@ name = Montreal, QC
 # lat = 46.0
 # lon = -74.0
 # name = Cottage
+
+# Radio CAT control via EladSpectrum TCP server.
+# Start EladSpectrum with: ./elad-spectrum -c 4532
+# Press 't' in the dashboard to tune the radio to the selected frequency.
+#
+# [radio]
+# host = localhost
+# port = 4532

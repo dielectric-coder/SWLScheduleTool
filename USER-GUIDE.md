@@ -11,16 +11,26 @@
 
 ### Configuration
 
-Create `swlconfig.conf` in the project root with your location (QTH):
+Create `swlconfig.conf` in the project root with your location (QTH) and optional radio connection:
 
 ```ini
 [qth]
 lat = 45.5017
 lon = -73.5673
 name = Montreal, QC
+
+[radio]
+host = localhost
+port = 4532
 ```
 
-This is used to calculate great-circle distance and compass bearing to each transmitter site.
+The `[qth]` section is used to calculate great-circle distance and compass bearing to each transmitter site. The `[radio]` section configures the connection to the EladSpectrum CAT server for the `t` (tune) key. You can also set the radio host and port via command-line flags:
+
+```bash
+swl --host 192.168.1.50 --cat-port 4532
+```
+
+These values are saved to the config file automatically, so you only need to pass them once.
 
 ### Downloading Schedule Data
 

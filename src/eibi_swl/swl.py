@@ -4,6 +4,7 @@ from eibi_swl import __version__
 from eibi_swl._paths import resolve_data_dir, resolve_config
 from eibi_swl._schedule import compute_on_air
 
+import argparse
 import os
 import sys
 import csv
@@ -438,7 +439,7 @@ class SWLApp(App):
 
     utc_display = reactive("--:-- UTC")
 
-    def __init__(self):
+    def __init__(self, radio_host="localhost", radio_port=4532):
         super().__init__()
         self.qth_list = load_all_qth()
         self.qth_index = 0
@@ -449,10 +450,8 @@ class SWLApp(App):
         self.target_names = load_target_names()
         self.language_names = load_language_names()
         self.displayed_rows = []
-        config = configparser.ConfigParser()
-        config.read(CONFIG_FILE)
-        self.radio_host = config.get("radio", "host", fallback="localhost")
-        self.radio_port = config.getint("radio", "port", fallback=4532)
+        self.radio_host = radio_host
+        self.radio_port = radio_port
 
     FREQ_LABEL = (
         "[#769ff0 on #394260]╭─[/]"
@@ -897,8 +896,61 @@ class SWLApp(App):
         self._run_update()
 
 
+def _save_radio_config(host, port):
+    """Save radio host/port to config file, preserving comments."""
+    lines = []
+    if os.path.isfile(CONFIG_FILE):
+        with open(CONFIG_FILE) as f:
+            lines = f.readlines()
+
+    # Check if [radio] section already exists
+    radio_idx = None
+    next_section_idx = None
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped == "[radio]":
+            radio_idx = i
+        elif radio_idx is not None and stripped.startswith("[") and stripped.endswith("]"):
+            next_section_idx = i
+            break
+
+    radio_lines = [
+        "[radio]\n",
+        f"host = {host}\n",
+        f"port = {port}\n",
+    ]
+
+    if radio_idx is not None:
+        # Replace existing [radio] section
+        end = next_section_idx if next_section_idx is not None else len(lines)
+        lines[radio_idx:end] = radio_lines + ["\n"]
+    else:
+        # Append new section
+        if lines and not lines[-1].endswith("\n"):
+            lines.append("\n")
+        lines.append("\n")
+        lines.extend(radio_lines)
+
+    with open(CONFIG_FILE, "w") as f:
+        f.writelines(lines)
+
+
 def main():
-    app = SWLApp()
+    parser = argparse.ArgumentParser(description="SWL - Shortwave Listener Dashboard")
+    parser.add_argument("--host", default=None, help="Radio CAT server host (default: from config)")
+    parser.add_argument("--cat-port", type=int, default=None, help="Radio CAT server port (default: from config)")
+    parser.add_argument("--version", action="version", version=f"eibi-swl {__version__}")
+    args = parser.parse_args()
+
+    config = configparser.ConfigParser()
+    config.read(CONFIG_FILE)
+    host = args.host or config.get("radio", "host", fallback="localhost")
+    port = args.cat_port or config.getint("radio", "port", fallback=4532)
+
+    if args.host or args.cat_port:
+        _save_radio_config(host, port)
+
+    app = SWLApp(radio_host=host, radio_port=port)
     app.run()
 
 

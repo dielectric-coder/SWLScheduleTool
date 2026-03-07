@@ -97,16 +97,20 @@ The binary is output to `dist/swl`.
 
 ## Configuration
 
-Create or edit `swlconfig.conf` in the project root with your QTH (station location):
+Create or edit `swlconfig.conf` in the project root with your QTH (station location) and optional radio connection:
 
 ```ini
 [qth]
 lat = 45.5017
 lon = -73.5673
 name = Montreal, QC
+
+[radio]
+host = localhost
+port = 4532
 ```
 
-This is used by `swl.py` to calculate bearing and distance to each transmitter site.
+The `[qth]` section is used to calculate bearing and distance to each transmitter site. The `[radio]` section configures the connection to the EladSpectrum CAT server for the `t` (tune) key. Radio settings can also be set via `--host` and `--cat-port` CLI flags.
 
 ## Usage
 
@@ -114,7 +118,10 @@ This is used by `swl.py` to calculate bearing and distance to each transmitter s
 
 ```bash
 swl
+swl --host 192.168.1.50 --cat-port 4532
 ```
+
+The `--host` and `--cat-port` flags are saved to the config file, so subsequent runs remember the connection without needing the flags again.
 
 Launches a full-screen terminal dashboard with:
 - Tokyo Night theme with black background

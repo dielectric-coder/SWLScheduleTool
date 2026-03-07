@@ -12,8 +12,10 @@ name = Montreal, QC
 # name = Cottage
 
 # Radio CAT control via EladSpectrum TCP server.
-# Start EladSpectrum with: ./elad-spectrum -c 4532
+# Start EladSpectrum with: ./elad-spectrum -c 4532 -l any
 # Press 't' in the dashboard to tune the radio to the selected frequency.
+# These values can also be set via --host and --cat-port flags,
+# which are saved here automatically for next time.
 #
 # [radio]
 # host = localhost

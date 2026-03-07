@@ -128,7 +128,7 @@ Target codes can be:
 
 ## Dependencies
 
-**Standard library:** `os`, `sys`, `csv`, `json`, `re`, `configparser`, `subprocess`, `math`, `datetime`, `urllib.request`, `shutil`
+**Standard library:** `argparse`, `os`, `sys`, `csv`, `json`, `re`, `configparser`, `socket`, `subprocess`, `math`, `datetime`, `urllib.request`, `shutil`
 
 **External packages:**
 - `rich` — Terminal formatting (checksked.py, swl.py)

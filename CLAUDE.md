@@ -11,8 +11,9 @@ SWL Tools (v1.0.0) is a collection of Python utilities for shortwave listeners (
 ### Interactive TUI Dashboard
 ```bash
 swl
+swl --host 192.168.1.50 --cat-port 4532
 ```
-Full-screen terminal dashboard with frequency search, station search, bearing/distance, and live UTC clock.
+Full-screen terminal dashboard with frequency search, station search, bearing/distance, and live UTC clock. Supports `--host` and `--cat-port` flags for remote radio CAT control; values are saved to config for subsequent runs.
 
 ### Check Stations on a Frequency
 ```bash
@@ -227,15 +228,19 @@ Both scripts work exclusively in UTC:
 
 ### Configuration
 
-**swlconfig.conf** - User QTH location (INI format)
+**swlconfig.conf** - User QTH location and radio connection (INI format)
 ```ini
 [qth]
 lat = 45.5017
 lon = -73.5673
 name = Montreal, QC
+
+[radio]
+host = localhost
+port = 4532
 ```
 
-Read by `swl.py` using `configparser` (stdlib). Used for bearing/distance calculations.
+Read by `swl.py` using `configparser` (stdlib). The `[qth]` section is used for bearing/distance calculations. The `[radio]` section configures the CAT server connection for the `t` (tune) key. Radio settings can also be set via `--host` and `--cat-port` CLI flags, which are saved to the config automatically.
 
 ## Dependencies
 

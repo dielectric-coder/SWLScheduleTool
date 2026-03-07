@@ -431,6 +431,7 @@ class SWLApp(App):
         ("escape", "quit", "Quit"),
         ("m", "show_map", "Map"),
         ("t", "tune_radio", "Tune"),
+        ("z", "zoom", "Zoom"),
         ("slash", "focus_search", "Search"),
         ("tab", "focus_next", "Next"),
         ("shift+tab", "focus_previous", "Prev"),
@@ -546,7 +547,7 @@ class SWLApp(App):
 
     def check_action(self, action, parameters):
         """Prevent quit/search bindings from firing while typing in the input."""
-        if action in ("quit", "focus_search", "tune_radio") and isinstance(self.focused, Input):
+        if action in ("quit", "focus_search", "tune_radio", "zoom") and isinstance(self.focused, Input):
             return None
         return True
 
@@ -572,52 +573,32 @@ class SWLApp(App):
         elif event.input.id == "qth-input":
             self._select_qth()
 
-    def _do_search(self):
-        freq_input = self.query_one("#freq-input", Input)
-        station_input = self.query_one("#station-input", Input)
-        freq = freq_input.value.strip()
-        station_query = station_input.value.strip().lower()
+    def _build_result(self, row, current_time):
+        """Build a result tuple for a schedule row. Returns
+        (row, dur_str, is_active, status, site_info, dist_str, brg_str, site_display, sort_minutes)."""
+        dur_str, is_active, status, sort_minutes = compute_on_air(row["time"], current_time)
+        qth_lat, qth_lon = self.qth["lat"], self.qth["lon"]
 
-        if not freq and not station_query:
-            return
+        site_info = resolve_site_info(row, self.sites_index)
+        if site_info:
+            dist = haversine(qth_lat, qth_lon, site_info["lat"], site_info["lon"])
+            brg = bearing(qth_lat, qth_lon, site_info["lat"], site_info["lon"])
+            dist_str = f"{dist:.0f}"
+            brg_str = f"{brg:03.0f}° {compass_label(brg)}"
+        else:
+            dist_str = "—"
+            brg_str = "—"
 
+        site_display = row["site_code"] if row["site_code"] else f"/{row['itu']}"
+
+        return (row, dur_str, is_active, status, site_info,
+                dist_str, brg_str, site_display, sort_minutes)
+
+    def _populate_table(self, results):
+        """Clear and populate the DataTable from a list of result tuples."""
         table = self.query_one("#schedule-table", DataTable)
         table.clear()
         self.displayed_rows = []
-
-        now = datetime.now(timezone.utc)
-        current_time = int(now.strftime("%H%M"))
-        qth_lat, qth_lon = self.qth["lat"], self.qth["lon"]
-
-        results = []
-
-        for row in self.schedule:
-            if freq and row["freq"] != freq:
-                continue
-            if station_query and station_query not in row["station"].lower():
-                continue
-
-            dur_str, is_active, status, sort_minutes = compute_on_air(row["time"], current_time)
-
-            # Resolve transmitter site
-            site_info = resolve_site_info(row, self.sites_index)
-            if site_info:
-                dist = haversine(qth_lat, qth_lon, site_info["lat"], site_info["lon"])
-                brg = bearing(qth_lat, qth_lon, site_info["lat"], site_info["lon"])
-                dist_str = f"{dist:.0f}"
-                brg_str = f"{brg:03.0f}° {compass_label(brg)}"
-            else:
-                dist_str = "—"
-                brg_str = "—"
-
-            # Site display
-            site_display = row["site_code"] if row["site_code"] else f"/{row['itu']}"
-
-            results.append((row, dur_str, is_active, status, site_info,
-                            dist_str, brg_str, site_display, sort_minutes))
-
-        # Sort: on-air first (by remaining asc), then next (by until asc), unparseable last
-        results.sort(key=lambda r: (0 if r[2] else (2 if r[8] == 9999 else 1), r[8]))
 
         for row, dur_str, is_active, status, site_info, dist_str, brg_str, site_display, _ in results:
             row_data = {
@@ -645,6 +626,34 @@ class SWLApp(App):
 
             table.add_row(*cells, key=str(row_index))
 
+        if table.row_count > 0:
+            table.focus()
+
+    def _do_search(self):
+        freq_input = self.query_one("#freq-input", Input)
+        station_input = self.query_one("#station-input", Input)
+        freq = freq_input.value.strip()
+        station_query = station_input.value.strip().lower()
+
+        if not freq and not station_query:
+            return
+
+        now = datetime.now(timezone.utc)
+        current_time = int(now.strftime("%H%M"))
+
+        results = []
+        for row in self.schedule:
+            if freq and row["freq"] != freq:
+                continue
+            if station_query and station_query not in row["station"].lower():
+                continue
+            results.append(self._build_result(row, current_time))
+
+        # Sort: on-air first (by remaining asc), then next (by until asc), unparseable last
+        results.sort(key=lambda r: (0 if r[2] else (2 if r[8] == 9999 else 1), r[8]))
+
+        self._populate_table(results)
+
         # Auto-fill the other search field with first result
         if results:
             first = results[0][0]
@@ -655,9 +664,117 @@ class SWLApp(App):
                 with freq_input.prevent(Input.Changed):
                     freq_input.value = first["freq"]
 
-        # Move focus to table so arrow keys navigate rows immediately
-        if table.row_count > 0:
-            table.focus()
+    def _rebuild_table_rows(self, table):
+        """Re-render all table rows from displayed_rows (preserves zoom styling)."""
+        table.clear()
+        for i, rd in enumerate(self.displayed_rows):
+            site_display = rd["site_code"] if rd["site_code"] else f"/{rd['itu']}"
+            cells_raw = [
+                rd["freq"], rd["time"], rd["itu"], site_display,
+                rd["station"], rd["lng"], rd["target"],
+                rd["dur_str"], rd["dist_str"], rd["brg_str"], rd["status"],
+            ]
+            if rd.get("zoom"):
+                cells = [Text(str(c), style="bold #769ff0") for c in cells_raw]
+            elif rd["is_active"]:
+                cells = [Text(str(c), style="bold green") for c in cells_raw]
+            else:
+                cells = [Text(str(c), style="#aaaaaa") for c in cells_raw]
+            table.add_row(*cells, key=str(i))
+
+    def action_zoom(self):
+        """Insert the nearest on-air stations below and above the current frequency, highlighted in blue."""
+        table = self.query_one(DataTable)
+        if not table.row_count or table.cursor_row is None:
+            self.bell()
+            return
+        try:
+            row_key = table.coordinate_to_cell_key(
+                (table.cursor_row, 0)).row_key
+            idx = int(str(row_key.value))
+        except (ValueError, TypeError):
+            self.bell()
+            return
+        if idx < 0 or idx >= len(self.displayed_rows):
+            self.bell()
+            return
+        rd = self.displayed_rows[idx]
+        try:
+            current_freq = float(rd["freq"])
+        except (ValueError, TypeError):
+            self.bell()
+            return
+
+        # Remove any previous zoom rows
+        had_zoom = any(r.get("zoom") for r in self.displayed_rows)
+        if had_zoom:
+            self.displayed_rows = [r for r in self.displayed_rows if not r.get("zoom")]
+            self._rebuild_table_rows(table)
+            # Recalculate idx for the current row after removing zoom rows
+            idx = None
+            for i, r in enumerate(self.displayed_rows):
+                if r["freq"] == rd["freq"] and r["time"] == rd["time"] and r["station"] == rd["station"] and not r.get("zoom"):
+                    idx = i
+                    break
+            if idx is None:
+                self.bell()
+                return
+
+        now = datetime.now(timezone.utc)
+        current_time = int(now.strftime("%H%M"))
+
+        # Find nearest on-air station below and above
+        best_below = None  # (freq_diff, result_tuple)
+        best_above = None
+
+        for row in self.schedule:
+            try:
+                row_freq = float(row["freq"])
+            except (ValueError, TypeError):
+                continue
+
+            _, is_active, _, _ = compute_on_air(row["time"], current_time)
+            if not is_active:
+                continue
+
+            if row_freq < current_freq:
+                diff = current_freq - row_freq
+                if best_below is None or diff < best_below[0]:
+                    best_below = (diff, self._build_result(row, current_time))
+            elif row_freq > current_freq:
+                diff = row_freq - current_freq
+                if best_above is None or diff < best_above[0]:
+                    best_above = (diff, self._build_result(row, current_time))
+
+        if not best_below and not best_above:
+            self.bell()
+            return
+
+        # Insert above neighbor after the current row, below neighbor before it
+        cursor_target = idx
+        if best_above:
+            row, dur_str, is_active, status, site_info, dist_str, brg_str, site_display, _ = best_above[1]
+            row_data = {
+                **row,
+                "dur_str": dur_str, "is_active": is_active, "status": status,
+                "site_info": site_info, "dist_str": dist_str, "brg_str": brg_str,
+                "zoom": True,
+            }
+            self.displayed_rows.insert(idx + 1, row_data)
+
+        if best_below:
+            row, dur_str, is_active, status, site_info, dist_str, brg_str, site_display, _ = best_below[1]
+            row_data = {
+                **row,
+                "dur_str": dur_str, "is_active": is_active, "status": status,
+                "site_info": site_info, "dist_str": dist_str, "brg_str": brg_str,
+                "zoom": True,
+            }
+            self.displayed_rows.insert(idx, row_data)
+            cursor_target = idx + 1  # current row shifted down by one
+
+        self._rebuild_table_rows(table)
+        table.move_cursor(row=cursor_target)
 
     def _select_qth(self):
         """Select a QTH from the config. Empty input cycles to next; text filters by name."""

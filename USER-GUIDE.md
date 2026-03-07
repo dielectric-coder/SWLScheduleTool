@@ -87,6 +87,7 @@ Launch with:
 
 - **◄ ON AIR 02h15** (bold green) — Station is currently broadcasting, 2h15m remaining
 - **→ NEXT 05h30** (light grey) — Station is off air, next broadcast starts in 5h30m
+- **Zoom rows** (bold blue) — Nearest on-air neighbors inserted by pressing `z`
 
 ### Station Detail View
 
@@ -115,6 +116,7 @@ Or press **F5** to trigger an update using the current period input value.
 | F5 | Update schedules |
 | Tab / Shift+Tab | Navigate between widgets |
 | / (slash) | Focus frequency input |
+| z | Zoom — show nearest on-air stations above/below current frequency |
 | q / Escape | Quit |
 | Arrow keys | Navigate table rows |
 

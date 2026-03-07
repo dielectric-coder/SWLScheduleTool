@@ -41,6 +41,7 @@ Search results for 6070 kHz with ON AIR highlighting, distance, and bearing from
 - **azMap Integration**: Press `m` to show transmitter location on an azimuthal map; reuses a running azMap window via IPC
 - **Bearing & Distance**: Great-circle distance and compass bearing from your QTH to each transmitter site
 - **UTC Time Display**: All times shown in UTC for international coordination
+- **Frequency Zoom**: Press `z` to see the nearest on-air stations above and below the current frequency, highlighted in blue
 - **Active Station Highlighting**: Currently broadcasting stations are highlighted in bold green
 - **Next Broadcast Display**: Inactive stations show time until next broadcast in light grey
 - **Remaining Time Display**: Shows how much time is left for active broadcasts
@@ -133,6 +134,7 @@ Launches a full-screen terminal dashboard with:
 - NEXT time display (light grey) for upcoming broadcasts
 - Station detail modal on row select (Enter)
 - Press `m` to open the selected station in [azMap](https://github.com/mikewam/azMap) (azimuthal map)
+- Press `z` to zoom — shows the nearest on-air stations above and below the current frequency (highlighted in blue)
 - Press `F5` to update schedules, `q` or `Escape` to quit
 
 ### Check Stations on a Frequency

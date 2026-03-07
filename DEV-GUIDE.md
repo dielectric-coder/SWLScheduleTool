@@ -35,7 +35,7 @@ The main application built with [Textual](https://textual.textualize.io/).
 - Tokyo Night theme (`theme = "tokyo-night"`) with black backgrounds
 - Starship-style powerline input prompts using Nerd Font glyphs
 - Color palette from user's Starship config: `#769ff0`, `#a3aed2`, `#394260`; all backgrounds black
-- ON AIR rows: bold green; inactive rows: `#aaaaaa` (light grey)
+- ON AIR rows: bold green; inactive rows: `#aaaaaa` (light grey); zoom rows: bold `#769ff0` (blue)
 - Detail modal: round `#769ff0` border, `#a9b1d6` text
 
 **Key Classes:**
@@ -59,11 +59,12 @@ The main application built with [Textual](https://textual.textualize.io/).
 
 **Event Flow:**
 1. `on_input_submitted` — Dispatches to `_do_search()` or `_run_update()` based on input ID
-2. `_do_search()` — Filters schedule by frequency, computes ON AIR/NEXT status, populates DataTable
+2. `_do_search()` — Filters schedule by frequency, computes ON AIR/NEXT status, populates DataTable via `_build_result()` and `_populate_table()` helpers
 3. `_run_update()` — Validates period (`^[ab]\d{2}$`), runs `updatesked.py` as subprocess in worker thread
 4. `_apply_reload(sites, schedule)` — Thread-safe callback to update data on main thread after successful download
 5. `on_data_table_row_selected` — Opens `DetailScreen` with resolved station details
-6. `_tick()` — Updates UTC clock every second
+6. `action_zoom()` — Finds nearest on-air stations below/above selected frequency, inserts them into displayed_rows as blue-highlighted zoom rows via `_rebuild_table_rows()`
+7. `_tick()` — Updates UTC clock every second
 
 ### checksked.py — CLI Query Tool
 

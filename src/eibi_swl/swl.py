@@ -428,7 +428,7 @@ class SWLApp(App):
     theme = "tokyo-night"
     BINDINGS = [
         ("q", "quit", "Quit"),
-        ("escape", "quit", "Quit"),
+        ("escape", "unfocus", "Unfocus"),
         ("m", "show_map", "Map"),
         ("t", "tune_radio", "Tune"),
         ("z", "zoom", "Zoom"),
@@ -547,9 +547,13 @@ class SWLApp(App):
 
     def check_action(self, action, parameters):
         """Prevent quit/search bindings from firing while typing in the input."""
-        if action in ("quit", "focus_search", "tune_radio", "zoom") and isinstance(self.focused, Input):
+        if isinstance(self.focused, Input) and action not in ("quit", "unfocus"):
             return None
         return True
+
+    def action_unfocus(self):
+        """Remove focus from any focused widget."""
+        self.set_focus(None)
 
     def action_focus_search(self):
         """Focus the frequency input field."""

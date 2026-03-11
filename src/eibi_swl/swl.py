@@ -346,41 +346,43 @@ Screen {
 
 #input-bar {
     dock: top;
-    height: 2;
+    height: 1;
     background: black;
     padding: 0 1;
     align: center top;
 }
 
-#freq-prompt {
-    width: 28;
-    height: 2;
+#freq-bar {
+    width: 30;
+    height: 1;
+    background: black;
 }
 
-#station-prompt {
-    width: 36;
-    height: 2;
-    margin-left: 1;
+#station-bar {
+    width: 38;
+    height: 1;
+    background: black;
 }
 
-#update-prompt {
-    width: 22;
-    height: 2;
-    margin-left: 1;
+#update-bar {
+    width: 24;
+    height: 1;
+    background: black;
 }
 
-#qth-prompt {
-    width: 28;
-    height: 2;
-    margin-left: 1;
+#qth-bar {
+    width: 30;
+    height: 1;
+    background: black;
 }
 
-.prompt-char {
-    width: 4;
+.field-label {
+    width: auto;
     height: 1;
 }
 
 #input-bar Input {
+    width: 1fr;
     height: 1;
     background: black;
     color: #769ff0;
@@ -455,53 +457,41 @@ class SWLApp(App):
         self.radio_port = radio_port
 
     FREQ_LABEL = (
-        "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
-        "[#090c0c on #a3aed2]  Frequency [/]"
-        "[#a3aed2 on black]\ue0b0[/]"
+        "[#090c0c on #a3aed2] Freq. [/]"
+        "[#a3aed2 on black]\ue0b0 [/]"
     )
     STATION_LABEL = (
-        "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
-        "[#090c0c on #a3aed2]  Station [/]"
-        "[#a3aed2 on black]\ue0b0[/]"
+        "[#090c0c on #a3aed2] Station [/]"
+        "[#a3aed2 on black]\ue0b0 [/]"
     )
     UPDATE_LABEL = (
-        "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
-        "[#090c0c on #a3aed2]  Update [/]"
-        "[#a3aed2 on black]\ue0b0[/]"
+        "[#090c0c on #a3aed2] Update [/]"
+        "[#a3aed2 on black]\ue0b0 [/]"
     )
     QTH_LABEL = (
-        "[#769ff0 on #394260]╭─[/]"
         "[#a3aed2]░▒▓[/]"
         "[#090c0c on #a3aed2] 󰍎 QTH [/]"
-        "[#a3aed2 on black]\ue0b0[/]"
+        "[#a3aed2 on black]\ue0b0 [/]"
     )
 
     def compose(self):
         yield Static(id="title-bar")
         with Horizontal(id="input-bar"):
-            with Vertical(id="freq-prompt"):
-                yield Static(self.FREQ_LABEL)
-                with Horizontal():
-                    yield Static("[#769ff0 on #394260]╰─\uf10c[/]", classes="prompt-char")
-                    yield Input(placeholder="kHz", id="freq-input")
-            with Vertical(id="station-prompt"):
-                yield Static(self.STATION_LABEL)
-                with Horizontal():
-                    yield Static("[#769ff0 on #394260]╰─\uf10c[/]", classes="prompt-char")
-                    yield Input(placeholder="Station name", id="station-input")
-            with Vertical(id="update-prompt"):
-                yield Static(self.UPDATE_LABEL)
-                with Horizontal():
-                    yield Static("[#769ff0 on #394260]╰─\uf10c[/]", classes="prompt-char")
-                    yield Input(placeholder="b25", id="period-input")
-            with Vertical(id="qth-prompt"):
-                yield Static(self.QTH_LABEL)
-                with Horizontal():
-                    yield Static("[#769ff0 on #394260]╰─\uf10c[/]", classes="prompt-char")
-                    yield Input(placeholder=self.qth["name"], id="qth-input")
+            with Horizontal(id="qth-bar"):
+                yield Static(self.QTH_LABEL, classes="field-label")
+                yield Input(placeholder=self.qth["name"], id="qth-input")
+            with Horizontal(id="freq-bar"):
+                yield Static(self.FREQ_LABEL, classes="field-label")
+                yield Input(placeholder="kHz", id="freq-input")
+            with Horizontal(id="station-bar"):
+                yield Static(self.STATION_LABEL, classes="field-label")
+                yield Input(placeholder="Station name", id="station-input")
+            with Horizontal(id="update-bar"):
+                yield Static(self.UPDATE_LABEL, classes="field-label")
+                yield Input(placeholder="b25", id="period-input")
         yield SWLDataTable(id="schedule-table")
         yield RichLog(id="update-log", highlight=True, markup=True)
         yield Static(id="status-bar", markup=True)
@@ -571,6 +561,15 @@ class SWLApp(App):
 
     def on_input_submitted(self, event):
         if event.input.id in ("freq-input", "station-input"):
+            # Clear the other field so we search by one criterion only
+            if event.input.id == "freq-input":
+                station = self.query_one("#station-input", Input)
+                with station.prevent(Input.Changed):
+                    station.value = ""
+            else:
+                freq = self.query_one("#freq-input", Input)
+                with freq.prevent(Input.Changed):
+                    freq.value = ""
             self._do_search()
         elif event.input.id == "period-input":
             self._run_update()
@@ -929,7 +928,7 @@ class SWLApp(App):
 
         try:
             subprocess.Popen(
-                ["azmap",
+                ["azmap-gtk",
                  str(self.qth["lat"]), str(self.qth["lon"]),
                  str(si["lat"]), str(si["lon"]),
                  "-c", self.qth["name"], "-t", target_name,

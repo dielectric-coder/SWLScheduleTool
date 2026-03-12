@@ -885,7 +885,10 @@ class SWLApp(App):
 
         self.push_screen(DetailScreen("\n".join(lines)))
 
-    FIFO_PATH = "/tmp/azmap-target.fifo"
+    FIFO_PATH = os.path.join(
+        os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}"),
+        "azmap-target.fifo",
+    )
 
     def action_show_map(self):
         """Send target to running azMap via FIFO, or launch a new instance."""

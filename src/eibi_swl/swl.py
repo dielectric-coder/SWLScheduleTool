@@ -889,6 +889,10 @@ class SWLApp(App):
         os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}"),
         "azmap-target.fifo",
     )
+    DEMOD_FIFO_PATH = os.path.join(
+        os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}"),
+        "swldemod-station.fifo",
+    )
 
     def action_show_map(self):
         """Send target to running azMap via FIFO, or launch a new instance."""
@@ -973,6 +977,16 @@ class SWLApp(App):
         except OSError:
             self.bell()
             return
+
+        # Send station name to SWL Demod Tool via FIFO
+        try:
+            fd = os.open(self.DEMOD_FIFO_PATH, os.O_WRONLY | os.O_NONBLOCK)
+            try:
+                os.write(fd, f"{rd['station']}\n".encode("utf-8"))
+            finally:
+                os.close(fd)
+        except OSError:
+            pass  # Demod tool not running — ignore
 
         # If azMap is already running, update the map target
         try:

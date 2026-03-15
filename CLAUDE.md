@@ -10,8 +10,8 @@ SWL Schedule Tool (v1.0.0) is a collection of Python utilities for shortwave lis
 
 ### Interactive TUI Dashboard
 ```bash
-swl
-swl --host 192.168.1.50 --cat-port 4532
+swl-sched
+swl-sched --host 192.168.1.50 --cat-port 4532
 ```
 Full-screen terminal dashboard with frequency search, station search, bearing/distance, and live UTC clock. Supports `--host` and `--cat-port` flags for remote radio CAT control; values are saved to config for subsequent runs.
 
@@ -62,7 +62,7 @@ src/eibi_swl/          # Python package installed to site-packages
 
 ### Entry points (pyproject.toml)
 
-- `swl` → `eibi_swl.swl:main`
+- `swl-sched` → `eibi_swl.swl:main`
 - `checksked` → `eibi_swl.checksked:main`
 - `updatesked` → `eibi_swl.updatesked:main`
 
@@ -71,7 +71,7 @@ src/eibi_swl/          # Python package installed to site-packages
 - `pip install -e .` — editable install for development
 - `python -m build` — build sdist + wheel
 - `cd packaging/archlinux && makepkg -si` — Arch Linux package
-- `.venv/bin/pyinstaller --onefile --name swl ...` — standalone binary (see below)
+- `.venv/bin/pyinstaller --onefile --name swl-sched ...` — standalone binary (see below)
 
 ### Standalone binary (PyInstaller)
 
@@ -81,7 +81,7 @@ Produces a single self-contained ELF executable (~16MB) that bundles Python, tex
 
 **Build command**:
 ```bash
-.venv/bin/pyinstaller --onefile --name swl \
+.venv/bin/pyinstaller --onefile --name swl-sched \
   --add-data "src/eibi_swl/countrycode.dat:eibi_swl" \
   --add-data "src/eibi_swl/targetcode:eibi_swl" \
   --add-data "src/eibi_swl/transmittersite:eibi_swl" \
@@ -92,7 +92,7 @@ Produces a single self-contained ELF executable (~16MB) that bundles Python, tex
   --paths=src src/eibi_swl/swl.py
 ```
 
-**Output**: `dist/swl`
+**Output**: `dist/swl-sched`
 
 **Important**: PyInstaller must run from the project venv that has `textual` and `rich` installed, not from a system-wide or pipx install, otherwise the dependencies won't be bundled.
 
@@ -105,17 +105,17 @@ cd packaging/archlinux && makepkg -si
 ```
 
 Installs:
-- Entry points (`swl`, `checksked`, `updatesked`) to `/usr/bin/`
-- Desktop entry to `/usr/share/applications/swl.desktop`
+- Entry points (`swl-sched`, `checksked`, `updatesked`) to `/usr/bin/`
+- Desktop entry to `/usr/share/applications/swl-sched.desktop`
 
 Runtime dependencies: `python`, `python-rich`, `python-textual`
 
 ### Desktop entry
 
-`packaging/swl.desktop` provides application menu integration. It launches `swl` in a terminal emulator. Installed automatically by the Arch package, or manually:
+`packaging/swl-sched.desktop` provides application menu integration. It launches `swl-sched` in a terminal emulator. Installed automatically by the Arch package, or manually:
 
 ```bash
-cp packaging/swl.desktop ~/.local/share/applications/
+cp packaging/swl-sched.desktop ~/.local/share/applications/
 ```
 
 ## Architecture
@@ -141,7 +141,7 @@ cp packaging/swl.desktop ~/.local/share/applications/
 - NEXT indicator in light grey showing time until broadcast starts for inactive stations
 - Station detail modal (Enter on row) with round blue border
 - DataTable with sortable columns, zebra stripes, row cursor
-- Key bindings: Enter to search/update, F5 to update schedules, t to tune radio, m to show azMap, z to zoom, Escape to unfocus input, q to quit
+- Key bindings: Enter to search/update, F5 to update schedules, t to tune radio, m to show azMap, z to zoom, l to log entry, Escape to unfocus input, q to quit
 - **Radio tuning** (`t` key): sends a CAT command to tune the radio to the selected row's frequency. If azMap is already running (FIFO at `/tmp/azmap-target.fifo` has an active reader), also updates the map target automatically. If azMap is not running, only tunes without launching a new map instance.
 - **Frequency zoom** (`z` key): scans the entire schedule for on-air stations and inserts the nearest on-air station below and above the selected row's frequency directly into the current results table, highlighted in bold blue (`#769ff0`). Pressing `z` again removes previous zoom rows before inserting fresh ones. Uses `_build_result()` and `_rebuild_table_rows()` helpers shared with `_do_search()`. Cursor stays on the original row after insertion.
 - **azMap IPC** (`m` key): sends target coordinates and station details to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon as center, transmitter site lat/lon as target, plus `-c` (QTH name), `-t` (station name), and `-d` (station detail string) flags. The `-d` flag passes `station|freq|country|site|lang|target` so azMap has full station info on first launch. FIFO wire format: `lat,lon,name|station|freq kHz|country|site|lang|target\n`. Subsequent `m` presses send updates via FIFO to the running instance.

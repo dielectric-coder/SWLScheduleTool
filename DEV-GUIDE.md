@@ -41,6 +41,7 @@ The main application built with [Textual](https://textual.textualize.io/).
 **Key Classes:**
 - `SWLApp(App)` — Main application; handles compose, search, update, tick
 - `DetailScreen(ModalScreen)` — Station detail popup
+- `LogEntryScreen(ModalScreen)` — SWL log entry form (listener, station, freq, mode, BW, SINPO, remarks)
 
 **Data Loading (on startup):**
 - `load_config()` — QTH from `swlconfig.conf` via `configparser`

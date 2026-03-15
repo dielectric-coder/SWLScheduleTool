@@ -329,6 +329,131 @@ class DetailScreen(ModalScreen):
                 yield Static("Press Escape to close", id="detail-hint")
 
 
+LOG_ENTRY_CSS = """
+#log-container {
+    align: center middle;
+    width: 100%;
+    height: 100%;
+    background: black 50%;
+}
+
+#log-card {
+    width: 60;
+    height: auto;
+    max-height: 90%;
+    border: round #769ff0;
+    background: black;
+    color: #a9b1d6;
+    padding: 0;
+}
+
+#log-title {
+    text-style: bold;
+    text-align: center;
+    width: 100%;
+    padding: 1 0;
+    color: #a3aed2;
+    border-bottom: round #769ff0;
+}
+
+#log-form {
+    width: 100%;
+    height: auto;
+    padding: 1 2;
+}
+
+.log-label {
+    width: 100%;
+    height: 1;
+    color: #a3aed2;
+    padding: 0;
+}
+
+.log-row {
+    width: 100%;
+    height: auto;
+    layout: horizontal;
+}
+
+.log-row-cell {
+    height: auto;
+}
+
+.log-row-cell .log-label {
+    width: 100%;
+}
+
+#log-form Input {
+    width: 100%;
+    height: 3;
+    margin: 0 0 0 0;
+}
+
+#log-hint {
+    text-align: center;
+    width: 100%;
+    padding: 0 0;
+    color: $text-muted;
+    border-top: round #769ff0;
+}
+"""
+
+
+class LogEntryScreen(ModalScreen):
+    """Modal form for creating an SWL log entry."""
+
+    CSS = LOG_ENTRY_CSS
+    BINDINGS = [
+        ("escape", "dismiss", "Close"),
+    ]
+
+    def __init__(self, listener="", station="", freq_khz=""):
+        super().__init__()
+        self._listener = listener
+        self._station = station
+        self._freq_khz = freq_khz
+
+    def compose(self):
+        with Container(id="log-container"):
+            with Container(id="log-card"):
+                yield Static("Log Entry", id="log-title")
+                with Vertical(id="log-form"):
+                    yield Static("Listener:", classes="log-label")
+                    yield Input(value=self._listener, id="log-listener")
+                    yield Static("Station:", classes="log-label")
+                    yield Input(value=self._station, id="log-station")
+                    with Horizontal(classes="log-row"):
+                        with Vertical(classes="log-row-cell"):
+                            yield Static("Freq kHz:", classes="log-label")
+                            yield Input(value=self._freq_khz, id="log-freq")
+                        with Vertical(classes="log-row-cell"):
+                            yield Static("Mode:", classes="log-label")
+                            yield Input(placeholder="e.g. AM", id="log-mode")
+                        with Vertical(classes="log-row-cell"):
+                            yield Static("BW:", classes="log-label")
+                            yield Input(placeholder="Hz", id="log-bw")
+                    yield Static("SINPO:", classes="log-label")
+                    yield Input(placeholder="e.g. 45444", id="log-sinpo")
+                    yield Static("Remarks:", classes="log-label")
+                    yield Input(placeholder="Free text", id="log-remarks")
+                yield Static("Tab: next \u00b7 Enter: save \u00b7 Esc: cancel", id="log-hint")
+
+    def on_mount(self):
+        self.query_one("#log-mode", Input).focus()
+
+    def on_input_submitted(self, event):
+        data = {
+            "listener": self.query_one("#log-listener", Input).value,
+            "station": self.query_one("#log-station", Input).value,
+            "freq_khz": self.query_one("#log-freq", Input).value,
+            "mode": self.query_one("#log-mode", Input).value,
+            "bw": self.query_one("#log-bw", Input).value,
+            "sinpo": self.query_one("#log-sinpo", Input).value,
+            "remarks": self.query_one("#log-remarks", Input).value,
+        }
+        self.dismiss(data)
+
+
 CSS = """
 Screen {
     layout: vertical;
@@ -438,12 +563,14 @@ class SWLApp(App):
         ("tab", "focus_next", "Next"),
         ("shift+tab", "focus_previous", "Prev"),
         ("f5", "update_schedules", "Update Sked"),
+        ("l", "log_entry", "Log"),
     ]
 
     utc_display = reactive("--:-- UTC")
 
-    def __init__(self, radio_host="localhost", radio_port=4532):
+    def __init__(self, radio_host="localhost", radio_port=4532, config=None):
         super().__init__()
+        self._config = config
         self.qth_list = load_all_qth()
         self.qth_index = 0
         self.qth = self.qth_list[0]
@@ -455,6 +582,12 @@ class SWLApp(App):
         self.displayed_rows = []
         self.radio_host = radio_host
         self.radio_port = radio_port
+        self._log_file = os.path.expanduser(
+            config.get("logging", "log_file", fallback="~/Documents/swl-log.csv")
+            if config else "~/Documents/swl-log.csv")
+        self._log_listener = (
+            config.get("logging", "listener", fallback="")
+            if config else "")
 
     FREQ_LABEL = (
         "[#a3aed2]░▒▓[/]"
@@ -968,12 +1101,11 @@ class SWLApp(App):
         except (ValueError, TypeError):
             self.bell()
             return
-        cmd = f"FA{freq_hz:011d};MD5;"
         try:
             with socket.create_connection(
                 (self.radio_host, self.radio_port), timeout=2
             ) as sock:
-                sock.sendall(cmd.encode("ascii"))
+                sock.sendall(f"FA{freq_hz:011d};".encode("ascii"))
         except OSError:
             self.bell()
             return
@@ -1041,6 +1173,95 @@ class SWLApp(App):
     def action_update_schedules(self):
         self._run_update()
 
+    def action_log_entry(self):
+        """Open the SWL log entry form."""
+        table = self.query_one(DataTable)
+        station = ""
+        freq_khz = ""
+        if table.row_count and table.cursor_row is not None:
+            try:
+                row_key = table.coordinate_to_cell_key(
+                    (table.cursor_row, 0)).row_key
+                idx = int(str(row_key.value))
+                if 0 <= idx < len(self.displayed_rows):
+                    rd = self.displayed_rows[idx]
+                    station = rd["station"]
+                    freq_khz = rd["freq"]
+            except (ValueError, TypeError):
+                pass
+        self.push_screen(
+            LogEntryScreen(
+                listener=self._log_listener,
+                station=station,
+                freq_khz=freq_khz),
+            callback=self._on_log_entry)
+
+    def _on_log_entry(self, data):
+        if data is None:
+            return
+        self._log_listener = data.get("listener", "")
+        if self._config:
+            _save_listener_config(self._log_listener, self._log_file)
+        self._write_log_entry(data)
+        self.notify("Log entry saved")
+
+    def _write_log_entry(self, data):
+        os.makedirs(os.path.dirname(self._log_file), exist_ok=True)
+        write_header = not os.path.exists(self._log_file)
+        now = datetime.now(timezone.utc)
+        with open(self._log_file, "a", newline="") as f:
+            writer = csv.writer(f)
+            if write_header:
+                writer.writerow(["date", "time_utc", "listener", "station",
+                                 "frequency_khz", "mode", "bandwidth", "sinpo", "remarks"])
+            writer.writerow([
+                now.strftime("%Y-%m-%d"),
+                now.strftime("%H:%M"),
+                data.get("listener", ""),
+                data.get("station", ""),
+                data.get("freq_khz", ""),
+                data.get("mode", ""),
+                data.get("bw", ""),
+                data.get("sinpo", ""),
+                data.get("remarks", ""),
+            ])
+
+
+def _save_listener_config(listener, log_file):
+    """Save listener name and log file to config file, preserving other sections."""
+    lines = []
+    if os.path.isfile(CONFIG_FILE):
+        with open(CONFIG_FILE) as f:
+            lines = f.readlines()
+
+    section_idx = None
+    next_section_idx = None
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped == "[logging]":
+            section_idx = i
+        elif section_idx is not None and stripped.startswith("[") and stripped.endswith("]"):
+            next_section_idx = i
+            break
+
+    section_lines = [
+        "[logging]\n",
+        f"listener = {listener}\n",
+        f"log_file = {log_file}\n",
+    ]
+
+    if section_idx is not None:
+        end = next_section_idx if next_section_idx is not None else len(lines)
+        lines[section_idx:end] = section_lines + ["\n"]
+    else:
+        if lines and not lines[-1].endswith("\n"):
+            lines.append("\n")
+        lines.append("\n")
+        lines.extend(section_lines)
+
+    with open(CONFIG_FILE, "w") as f:
+        f.writelines(lines)
+
 
 def _save_radio_config(host, port):
     """Save radio host/port to config file, preserving comments."""
@@ -1096,7 +1317,7 @@ def main():
     if args.host or args.cat_port:
         _save_radio_config(host, port)
 
-    app = SWLApp(radio_host=host, radio_port=port)
+    app = SWLApp(radio_host=host, radio_port=port, config=config)
     app.run()
 
 

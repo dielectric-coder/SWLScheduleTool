@@ -41,6 +41,7 @@ Search results for 6070 kHz with ON AIR highlighting, distance, and bearing from
 - **azMap Integration**: Press `m` to show transmitter location on an azimuthal map; reuses a running azMap window via IPC
 - **Bearing & Distance**: Great-circle distance and compass bearing from your QTH to each transmitter site
 - **UTC Time Display**: All times shown in UTC for international coordination
+- **SWL Logging**: Press `l` to log the selected station to `~/Documents/swl-log.csv` (shared with SWLDemodTool)
 - **Frequency Zoom**: Press `z` to see the nearest on-air stations above and below the current frequency, highlighted in blue
 - **Active Station Highlighting**: Currently broadcasting stations are highlighted in bold green
 - **Next Broadcast Display**: Inactive stations show time until next broadcast in light grey
@@ -58,7 +59,7 @@ Search results for 6070 kHz with ON AIR highlighting, distance, and bearing from
 pip install eibi-swl-dashboard
 ```
 
-This installs three commands: `swl`, `checksked`, and `updatesked`.
+This installs three commands: `swl-sched`, `checksked`, and `updatesked`.
 
 ### From source (development)
 
@@ -75,7 +76,7 @@ cd packaging/archlinux
 makepkg -si
 ```
 
-This installs the entry points (`swl`, `checksked`, `updatesked`) and a desktop entry for application menu integration.
+This installs the entry points (`swl-sched`, `checksked`, `updatesked`) and a desktop entry for application menu integration.
 
 ### Standalone binary
 
@@ -83,7 +84,7 @@ Build a self-contained executable (~16MB) that bundles Python and all dependenci
 
 ```bash
 python -m venv .venv && .venv/bin/pip install -e . pyinstaller
-.venv/bin/pyinstaller --onefile --name swl \
+.venv/bin/pyinstaller --onefile --name swl-sched \
   --add-data "src/eibi_swl/countrycode.dat:eibi_swl" \
   --add-data "src/eibi_swl/targetcode:eibi_swl" \
   --add-data "src/eibi_swl/transmittersite:eibi_swl" \
@@ -94,7 +95,7 @@ python -m venv .venv && .venv/bin/pip install -e . pyinstaller
   --paths=src src/eibi_swl/swl.py
 ```
 
-The binary is output to `dist/swl`.
+The binary is output to `dist/swl-sched`.
 
 ## Configuration
 
@@ -109,17 +110,21 @@ name = Montreal, QC
 [radio]
 host = localhost
 port = 4532
+
+[logging]
+listener = Your Name
+log_file = ~/Documents/swl-log.csv
 ```
 
-The `[qth]` section is used to calculate bearing and distance to each transmitter site. The `[radio]` section configures the connection to the EladSpectrum CAT server for the `t` (tune) key. Radio settings can also be set via `--host` and `--cat-port` CLI flags.
+The `[qth]` section is used to calculate bearing and distance to each transmitter site. The `[radio]` section configures the connection to the EladSpectrum CAT server for the `t` (tune) key. Radio settings can also be set via `--host` and `--cat-port` CLI flags. The `[logging]` section stores the listener name (persisted across sessions) and log file path.
 
 ## Usage
 
 ### Interactive TUI Dashboard
 
 ```bash
-swl
-swl --host 192.168.1.50 --cat-port 4532
+swl-sched
+swl-sched --host 192.168.1.50 --cat-port 4532
 ```
 
 The `--host` and `--cat-port` flags are saved to the config file, so subsequent runs remember the connection without needing the flags again.
@@ -135,6 +140,7 @@ Launches a full-screen terminal dashboard with:
 - Station detail modal on row select (Enter)
 - Press `m` to open the selected station in [azMap](https://github.com/mikewam/azMap) (azimuthal map)
 - Press `z` to zoom — shows the nearest on-air stations above and below the current frequency (highlighted in blue)
+- Press `l` to log the selected station (SWL log entry form with SINPO, mode, remarks)
 - Press `F5` to update schedules, `q` or `Escape` to quit
 
 ### Check Stations on a Frequency

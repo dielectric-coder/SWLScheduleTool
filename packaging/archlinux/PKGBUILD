@@ -19,5 +19,5 @@ build() {
 package() {
     cd "SWLScheduleTool-$pkgver"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    install -Dm644 packaging/swl.desktop "$pkgdir/usr/share/applications/swl.desktop"
+    install -Dm644 packaging/swl-sched.desktop "$pkgdir/usr/share/applications/swl-sched.desktop"
 }

@@ -31,7 +31,7 @@ Homepage = "https://github.com/mikewam/SWLScheduleTool"
 Issues = "https://github.com/mikewam/SWLScheduleTool/issues"
 
 [project.scripts]
-swl = "eibi_swl.swl:main"
+swl-sched = "eibi_swl.swl:main"
 checksked = "eibi_swl.checksked:main"
 updatesked = "eibi_swl.updatesked:main"
 

@@ -27,7 +27,7 @@ port = 4532
 The `[qth]` section is used to calculate great-circle distance and compass bearing to each transmitter site. The `[radio]` section configures the connection to the EladSpectrum CAT server for the `t` (tune) key. You can also set the radio host and port via command-line flags:
 
 ```bash
-swl --host 192.168.1.50 --cat-port 4532
+swl-sched --host 192.168.1.50 --cat-port 4532
 ```
 
 These values are saved to the config file automatically, so you only need to pass them once.
@@ -117,8 +117,21 @@ Or press **F5** to trigger an update using the current period input value.
 | Tab / Shift+Tab | Navigate between widgets |
 | / (slash) | Focus frequency input |
 | z | Zoom — show nearest on-air stations above/below current frequency |
+| l | Log — open SWL log entry form for selected station |
 | q / Escape | Quit |
 | Arrow keys | Navigate table rows |
+
+### SWL Logging
+
+Press `l` on a selected station row to open the log entry form. The form is pre-filled with the station name and frequency from the selected row. Fill in Mode, BW (bandwidth), SINPO rating, and remarks, then press Enter to save.
+
+Log entries are appended to `~/Documents/swl-log.csv` (CSV format, same file used by SWLDemodTool). The listener name persists across sessions via the config file (`[logging]` section).
+
+```ini
+[logging]
+listener = Your Name
+log_file = ~/Documents/swl-log.csv
+```
 
 ## CLI Schedule Check (checksked.py)
 

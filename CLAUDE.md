@@ -25,7 +25,7 @@ Displays all broadcasts on the specified frequency, highlighting currently activ
 
 ### Update Schedule Data
 ```bash
-updatesked <schedule_period> [--insecure]
+updatesked <schedule_period>
 ```
 Example: `updatesked b25` or `updatesked a25`
 
@@ -155,7 +155,7 @@ cp packaging/swl-sched.desktop ~/.local/share/applications/
 - Uses UTF-8 encoding to read CSV files (converted from ISO-8859-1 by updatesked)
 
 **src/eibi_swl/updatesked.py** - Schedule update tool
-- Downloads schedule files from `https://eibispace.de/dx` with verified SSL (requires `--insecure` flag to bypass on cert failure)
+- Downloads schedule files from `http://eibispace.de/dx` via plain HTTP
 - Downloads capped at 10 MB per file
 - Processes three file types:
   - `sked-{period}.csv` → `sked-current.csv` (main schedule)

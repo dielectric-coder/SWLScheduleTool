@@ -6,7 +6,6 @@ import os
 import subprocess
 import urllib.request
 import urllib.error
-import ssl
 import re
 import json
 
@@ -145,13 +144,11 @@ def _parse_multi_site(sites, country, site_code, rest, coord_matches):
 def main():
     parser = argparse.ArgumentParser(description="Download EiBi schedule data")
     parser.add_argument("period", help="Schedule period (e.g. a25, b25)")
-    parser.add_argument("--insecure", action="store_true",
-                        help="Allow unverified SSL if certificate check fails")
     args = parser.parse_args()
 
     # Configuration
     SCHED_DIR = resolve_data_dir()
-    BASE_URL = "https://eibispace.de/dx"
+    BASE_URL = "http://eibispace.de/dx"
 
     # Create schedule directory if it doesn't exist
     os.makedirs(SCHED_DIR, exist_ok=True)
@@ -168,21 +165,6 @@ def main():
     print(f"updating schedule {period}")
     print(f"Data directory: {SCHED_DIR}")
     print()
-
-    # Create SSL context (eibispace.de may have certificate issues)
-    ssl_ctx = ssl.create_default_context()
-    try:
-        urllib.request.urlopen(f"{BASE_URL}/", context=ssl_ctx, timeout=5)
-    except (ssl.SSLError, urllib.error.URLError):
-        if args.insecure:
-            ssl_ctx = ssl._create_unverified_context()
-            print("Warning: Using unverified SSL (--insecure flag set)")
-        else:
-            print("Error: SSL certificate verification failed for eibispace.de")
-            print("If you trust this connection, re-run with --insecure")
-            sys.exit(1)
-    except OSError:
-        pass
 
     # List of files to download and convert
     files_to_process = [
@@ -204,7 +186,7 @@ def main():
         # Download file
         try:
             print(f"Downloading {source_file}...")
-            with urllib.request.urlopen(url, context=ssl_ctx) as resp:
+            with urllib.request.urlopen(url) as resp:
                 with open(source_path, 'wb') as f:
                     f.write(resp.read(MAX_DOWNLOAD_BYTES))
 
@@ -226,7 +208,7 @@ def main():
 
     try:
         print(f"Downloading {readme_source_name}...")
-        with urllib.request.urlopen(readme_url, context=ssl_ctx) as resp:
+        with urllib.request.urlopen(readme_url) as resp:
             with open(readme_source_path, 'wb') as f:
                 f.write(resp.read())
 

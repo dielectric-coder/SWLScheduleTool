@@ -38,7 +38,8 @@ Search results for 6070 kHz with ON AIR highlighting, distance, and bearing from
 
 - **Interactive TUI Dashboard**: Full-screen terminal UI with live UTC clock, frequency search, bearing and distance display
 - **Real-time Schedule Checking**: Query current broadcasts on any frequency
-- **azMap Integration**: Press `m` to show transmitter location on an azimuthal map; reuses a running azMap window via IPC
+- **Radio Tuning**: Press `t` to tune your radio via CAT server; also sends station info to SWLDemodTool
+- **azmap-gtk Integration**: Press `m` to show transmitter location on an azimuthal map; reuses a running instance via IPC
 - **Bearing & Distance**: Great-circle distance and compass bearing from your QTH to each transmitter site
 - **UTC Time Display**: All times shown in UTC for international coordination
 - **SWL Logging**: Press `l` to log the selected station to `~/Documents/swl-log.csv` (shared with SWLDemodTool)
@@ -132,16 +133,17 @@ The `--host` and `--cat-port` flags are saved to the config file, so subsequent 
 Launches a full-screen terminal dashboard with:
 - Tokyo Night theme with black background
 - Starship-style powerline input prompts (requires Nerd Font)
-- Two inputs: **Frequency** (kHz, press Enter to search) and **Update** (schedule period like `b25`, press Enter to download)
+- Four inputs: **QTH** (station location), **Frequency** (kHz), **Station** (name search), and **Update** (schedule period like `b25`)
 - Live UTC clock
 - Schedule table with distance (km) and bearing from your QTH
 - ON AIR highlighting (bold green) for active broadcasts
 - NEXT time display (light grey) for upcoming broadcasts
 - Station detail modal on row select (Enter)
-- Press `m` to open the selected station in [azMap](https://github.com/mikewam/azMap) (azimuthal map)
+- Press `t` to tune the radio to the selected frequency via CAT server
+- Press `m` to open the selected station in [azmap-gtk](https://github.com/mikewam/azMap) (azimuthal map)
 - Press `z` to zoom — shows the nearest on-air stations above and below the current frequency (highlighted in blue)
 - Press `l` to log the selected station (SWL log entry form with SINPO, mode, remarks)
-- Press `F5` to update schedules, `q` or `Escape` to quit
+- Press `F5` to update schedules, `Escape` to unfocus input, `q` to quit
 
 ### Check Stations on a Frequency
 
@@ -249,7 +251,7 @@ Common target area codes:
 
 ## Requirements
 
-- Python 3.x
+- Python >=3.10
 - Standard library modules: `sys`, `os`, `csv`, `datetime`, `json`, `re`, `configparser`, `math`
 - External: `rich` (install via `pip install rich` or `pacman -S python-rich`)
 - External: `textual` (install via `pip install textual` or `pacman -S python-textual`) — required for `swl.py`

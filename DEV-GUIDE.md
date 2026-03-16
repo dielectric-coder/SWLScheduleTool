@@ -4,25 +4,31 @@
 
 ```
 SWLScheduleTool/
-├── swl.py                  # Interactive TUI dashboard (Textual)
-├── checksked.py            # CLI frequency query tool (Rich)
-├── updatesked.py           # Schedule downloader & converter
-├── swlconfig.conf          # User QTH configuration (git-ignored)
-├── .gitignore              # Ignores __pycache__/, swlconfig.conf
-├── countrycode.dat         # ITU country codes (latin-1)
-├── targetcode              # Target area code definitions
-├── transmittersite         # Transmitter site locations (text)
+├── pyproject.toml          # Build config, entry points, dependencies
 ├── CLAUDE.md               # Claude Code instructions
 ├── README.md               # Project overview
 ├── USER-GUIDE.md           # End-user documentation
 ├── DEV-GUIDE.md            # This file
-└── swl-schedules-data/     # Schedule data directory
-    ├── sked-current.csv    # Active schedule (semicolon CSV)
-    ├── freq-current.dat    # Frequency-sorted list
-    ├── bc-current.dat      # Time-sorted list
-    ├── README-current.TXT  # EiBi documentation
-    ├── transmitter-sites.json  # Extracted sites with coordinates
-    └── sked-{a|b}##.csv   # Archived seasonal files
+├── packaging/
+│   ├── swl-sched.desktop   # Desktop entry for app menu
+│   └── archlinux/PKGBUILD  # Arch Linux package build
+└── src/eibi_swl/           # Python package (src-layout)
+    ├── __init__.py          # __version__ = "1.0.1"
+    ├── _paths.py            # XDG path resolution (dev vs installed)
+    ├── swl.py               # Interactive TUI dashboard (Textual)
+    ├── checksked.py         # CLI frequency query tool (Rich)
+    ├── updatesked.py        # Schedule downloader & converter
+    ├── swlconfig.conf.sample# Sample config for distribution
+    ├── countrycode.dat      # ITU country codes
+    ├── targetcode           # Target area code definitions
+    ├── transmittersite      # Transmitter site locations (text)
+    └── swl-schedules-data/  # Schedule data directory
+        ├── sked-current.csv # Active schedule (semicolon CSV)
+        ├── freq-current.dat # Frequency-sorted list
+        ├── bc-current.dat   # Time-sorted list
+        ├── README-current.TXT   # EiBi documentation
+        ├── transmitter-sites.json # Extracted sites with coordinates
+        └── sked-{a|b}##.csv# Archived seasonal files
 ```
 
 ## Architecture
@@ -39,14 +45,15 @@ The main application built with [Textual](https://textual.textualize.io/).
 - Detail modal: round `#769ff0` border, `#a9b1d6` text
 
 **Key Classes:**
-- `SWLApp(App)` — Main application; handles compose, search, update, tick
+- `SWLApp(App)` — Main application; handles compose, search, update, tick, radio tuning, azmap-gtk IPC
 - `DetailScreen(ModalScreen)` — Station detail popup
 - `LogEntryScreen(ModalScreen)` — SWL log entry form (listener, station, freq, mode, BW, SINPO, remarks)
+- `QTHScreen(ModalScreen)` — QTH location selector
 
 **Data Loading (on startup):**
 - `load_config()` — QTH from `swlconfig.conf` via `configparser`
 - `load_sites()` — Transmitter sites from `transmitter-sites.json`
-- `load_schedule()` — Schedule rows from `sked-current.csv` (latin-1, semicolon-delimited)
+- `load_schedule()` — Schedule rows from `sked-current.csv` (UTF-8, semicolon-delimited)
 - `load_country_names()` — ITU codes from `countrycode.dat`
 - `load_target_names()` — Target areas from `targetcode` with compound code expansion
 - `load_language_names()` — Language codes parsed from `README-current.TXT` Section I
@@ -65,7 +72,10 @@ The main application built with [Textual](https://textual.textualize.io/).
 4. `_apply_reload(sites, schedule)` — Thread-safe callback to update data on main thread after successful download
 5. `on_data_table_row_selected` — Opens `DetailScreen` with resolved station details
 6. `action_zoom()` — Finds nearest on-air stations below/above selected frequency, inserts them into displayed_rows as blue-highlighted zoom rows via `_rebuild_table_rows()`
-7. `_tick()` — Updates UTC clock every second
+7. `action_tune()` — Tunes radio via CAT server, sends station to SWLDemodTool FIFO, updates azmap-gtk if running
+8. `action_show_map()` — Sends target to azmap-gtk via FIFO at `$XDG_RUNTIME_DIR/azmap-target.fifo`, or launches new instance
+9. `action_log()` — Opens `LogEntryScreen` to log station to `~/Documents/swl-log.csv`
+10. `_tick()` — Updates UTC clock every second
 
 ### checksked.py — CLI Query Tool
 
@@ -73,15 +83,13 @@ Standalone Rich-based CLI tool. Reads the same `sked-current.csv` and displays a
 
 ### updatesked.py — Schedule Updater
 
-Downloads EiBi schedule files from `https://eibispace.de/dx`:
+Downloads EiBi schedule files from `http://eibispace.de/dx` via plain HTTP:
 - `sked-{period}.csv` → `sked-current.csv`
 - `freq-{period}.txt` → `freq-current.dat`
 - `bc-{period}.txt` → `bc-current.dat`
 - `README.TXT` → `README-current.TXT`
 
 Converts all files from ISO-8859-1 to UTF-8. Extracts transmitter sites from README Section IV into `transmitter-sites.json`.
-
-**SSL Handling:** Probes the server with a verified SSL context first. If the server has certificate issues (expired/misconfigured), automatically falls back to an unverified SSL context and prints a note.
 
 **Site Extraction:**
 - `parse_dms_coord()` — Converts DMS coordinates (e.g. `34N32`, `26S07'40"`) to decimal degrees

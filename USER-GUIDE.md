@@ -4,14 +4,14 @@
 
 ### Prerequisites
 
-- Python 3.x
+- Python >=3.10
 - [rich](https://github.com/Textualize/rich) — `pip install rich` or `pacman -S python-rich`
 - [textual](https://github.com/Textualize/textual) — `pip install textual` or `pacman -S python-textual`
 - A [Nerd Font](https://www.nerdfonts.com/) in your terminal (for powerline glyphs)
 
 ### Configuration
 
-Create `swlconfig.conf` in the project root with your location (QTH) and optional radio connection:
+On first run, a config file is created from the sample. For a dev install it lives at `src/eibi_swl/swlconfig.conf`; for a system install at `~/.config/eibi-swl/swlconfig.conf`. Edit it with your location (QTH) and optional radio connection:
 
 ```ini
 [qth]
@@ -37,7 +37,7 @@ These values are saved to the config file automatically, so you only need to pas
 Before using the tools, download the current EiBi schedule:
 
 ```bash
-./updatesked.py b25
+updatesked b25
 ```
 
 - `b` = winter season, `a` = summer season
@@ -46,18 +46,18 @@ Before using the tools, download the current EiBi schedule:
 
 This downloads schedule files into `swl-schedules-data/` and extracts transmitter site coordinates.
 
-## Interactive TUI Dashboard (swl.py)
+## Interactive TUI Dashboard
 
 Launch with:
 
 ```bash
-./swl.py
+swl-sched
 ```
 
 ### Screen Layout
 
 - **Title bar** — App name, live UTC clock, your QTH location
-- **Input prompts** — Starship-style powerline prompts for Frequency and Update
+- **Input prompts** — Starship-style powerline prompts for QTH, Frequency, Station, and Update
 - **Schedule table** — Search results with broadcast details
 - **Status bar** — Data stats and hints
 
@@ -66,6 +66,14 @@ Launch with:
 1. Type a frequency in kHz in the **Frequency** input (e.g. `6070`)
 2. Press **Enter**
 3. The table shows all broadcasts on that frequency
+4. The **Station** field auto-fills with the first matching station name
+
+### Searching by Station Name
+
+1. Type a station name (or part of it) in the **Station** input
+2. Press **Enter**
+3. Case-insensitive substring match across all stations
+4. The **Frequency** field auto-fills with the first matching frequency
 
 ### Understanding the Results
 
@@ -112,13 +120,16 @@ Or press **F5** to trigger an update using the current period input value.
 
 | Key | Action |
 |-----|--------|
-| Enter | Search (in frequency input) / Update (in period input) / Detail (in table) |
+| Enter | Search (in frequency/station input) / Update (in period input) / Detail (in table) |
 | F5 | Update schedules |
 | Tab / Shift+Tab | Navigate between widgets |
 | / (slash) | Focus frequency input |
+| t | Tune radio to selected frequency via CAT server |
+| m | Show transmitter on [azmap-gtk](https://github.com/mikewam/azMap) azimuthal map |
 | z | Zoom — show nearest on-air stations above/below current frequency |
 | l | Log — open SWL log entry form for selected station |
-| q / Escape | Quit |
+| Escape | Unfocus input / close modal |
+| q | Quit |
 | Arrow keys | Navigate table rows |
 
 ### SWL Logging
@@ -133,12 +144,12 @@ listener = Your Name
 log_file = ~/Documents/swl-log.csv
 ```
 
-## CLI Schedule Check (checksked.py)
+## CLI Schedule Check
 
 For a quick check without the TUI:
 
 ```bash
-./checksked.py 6070
+checksked 6070
 ```
 
 Displays a formatted table with all broadcasts on that frequency. Active stations are highlighted in bold green with `◄ ON AIR` and remaining time.

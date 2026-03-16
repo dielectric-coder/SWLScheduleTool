@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SWL Schedule Tool (v1.0.0) is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
+SWL Schedule Tool (v1.0.1) is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
 
 ## Core Commands
 
@@ -41,7 +41,7 @@ Downloads the latest schedule data from EiBi for the specified season:
 
 ```
 src/eibi_swl/          # Python package installed to site-packages
-  __init__.py           # __version__ = "1.0.0"
+  __init__.py           # __version__ = "1.0.1"
   _paths.py             # XDG path resolution (dev vs installed)
   swl.py                # TUI dashboard
   checksked.py          # CLI frequency query
@@ -126,7 +126,7 @@ cp packaging/swl-sched.desktop ~/.local/share/applications/
 - Full-screen terminal UI with live UTC clock, frequency search, and schedule table
 - Tokyo Night theme with black background
 - Starship-style powerline input prompts (two-line `╭─░▒▓`/`╰─` segments with nerd font glyphs)
-- Three input fields: Frequency (kHz), Station (name search), and Update (schedule period)
+- Four input fields: QTH (station location), Frequency (kHz), Station (name search), and Update (schedule period)
   - Enter in frequency input → search by freq, auto-fills Station field with first result
   - Enter in station input → case-insensitive substring search, auto-fills Frequency field with first result
   - Editing either search field clears the other (via `Input.prevent(Input.Changed)`)
@@ -141,10 +141,10 @@ cp packaging/swl-sched.desktop ~/.local/share/applications/
 - NEXT indicator in light grey showing time until broadcast starts for inactive stations
 - Station detail modal (Enter on row) with round blue border
 - DataTable with sortable columns, zebra stripes, row cursor
-- Key bindings: Enter to search/update, F5 to update schedules, t to tune radio, m to show azMap, z to zoom, l to log entry, Escape to unfocus input, q to quit
-- **Radio tuning** (`t` key): sends a CAT command to tune the radio to the selected row's frequency. If azMap is already running (FIFO at `/tmp/azmap-target.fifo` has an active reader), also updates the map target automatically. If azMap is not running, only tunes without launching a new map instance.
+- Key bindings: Enter to search/update, F5 to update schedules, t to tune radio, m to show azmap-gtk, z to zoom, l to log entry, Escape to unfocus input, q to quit
+- **Radio tuning** (`t` key): sends a CAT command to tune the radio to the selected row's frequency. Also sends station name to SWLDemodTool via FIFO at `$XDG_RUNTIME_DIR/swldemod-station.fifo`. If azmap-gtk is already running (FIFO at `$XDG_RUNTIME_DIR/azmap-target.fifo` has an active reader), also updates the map target automatically. If azmap-gtk is not running, only tunes without launching a new map instance.
 - **Frequency zoom** (`z` key): scans the entire schedule for on-air stations and inserts the nearest on-air station below and above the selected row's frequency directly into the current results table, highlighted in bold blue (`#769ff0`). Pressing `z` again removes previous zoom rows before inserting fresh ones. Uses `_build_result()` and `_rebuild_table_rows()` helpers shared with `_do_search()`. Cursor stays on the original row after insertion.
-- **azMap IPC** (`m` key): sends target coordinates and station details to a running azMap instance via a named pipe (FIFO) at `/tmp/azmap-target.fifo`. If no azMap is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon as center, transmitter site lat/lon as target, plus `-c` (QTH name), `-t` (station name), and `-d` (station detail string) flags. The `-d` flag passes `station|freq|country|site|lang|target` so azMap has full station info on first launch. FIFO wire format: `lat,lon,name|station|freq kHz|country|site|lang|target\n`. Subsequent `m` presses send updates via FIFO to the running instance.
+- **azmap-gtk IPC** (`m` key): sends target coordinates and station details to a running azmap-gtk instance via a named pipe (FIFO) at `$XDG_RUNTIME_DIR/azmap-target.fifo`. If no azmap-gtk is running (FIFO open fails with ENXIO), launches a new instance via `subprocess.Popen` passing 4 positional args: QTH lat/lon as center, transmitter site lat/lon as target, plus `-c` (QTH name), `-t` (station name), and `-d` (station detail string) flags. The `-d` flag passes `station|freq|country|site|lang|target` so azmap-gtk has full station info on first launch. FIFO wire format: `lat,lon,name|station|freq kHz|country|site|lang|target\n`. Subsequent `m` presses send updates via FIFO to the running instance.
 
 **src/eibi_swl/checksked.py** - Query tool for checking active broadcasts
 - Reads `swl-schedules-data/sked-current.csv` (semicolon-delimited CSV)

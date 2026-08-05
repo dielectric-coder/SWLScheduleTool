@@ -125,7 +125,7 @@ Or press **F5** to trigger an update using the current period input value.
 | Tab / Shift+Tab | Navigate between widgets |
 | / (slash) | Focus frequency input |
 | t | Tune radio to selected frequency via CAT server |
-| m | Show transmitter on [azmap-gtk](https://github.com/mikewam/azMap) azimuthal map |
+| m | Show transmitter on [azmap-gtk](https://github.com/dielectric-coder/azMapGTK) azimuthal map |
 | z | Zoom — show nearest on-air stations above/below current frequency |
 | l | Log — open SWL log entry form for selected station |
 | Escape | Unfocus input / close modal |

@@ -27,8 +27,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mikewam/SWLScheduleTool"
-Issues = "https://github.com/mikewam/SWLScheduleTool/issues"
+Homepage = "https://github.com/dielectric-coder/SWLScheduleTool"
+Issues = "https://github.com/dielectric-coder/SWLScheduleTool/issues"
 
 [project.scripts]
 swl-sched = "eibi_swl.swl:main"

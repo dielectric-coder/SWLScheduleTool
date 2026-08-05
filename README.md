@@ -65,7 +65,7 @@ This installs three commands: `swl-sched`, `checksked`, and `updatesked`.
 ### From source (development)
 
 ```bash
-git clone https://github.com/mikewam/SWLScheduleTool.git
+git clone https://github.com/dielectric-coder/SWLScheduleTool.git
 cd SWLScheduleTool
 pip install -e .
 ```
@@ -140,7 +140,7 @@ Launches a full-screen terminal dashboard with:
 - NEXT time display (light grey) for upcoming broadcasts
 - Station detail modal on row select (Enter)
 - Press `t` to tune the radio to the selected frequency via CAT server
-- Press `m` to open the selected station in [azmap-gtk](https://github.com/mikewam/azMap) (azimuthal map)
+- Press `m` to open the selected station in [azmap-gtk](https://github.com/dielectric-coder/azMapGTK) (azimuthal map)
 - Press `z` to zoom — shows the nearest on-air stations above and below the current frequency (highlighted in blue)
 - Press `l` to log the selected station (SWL log entry form with SINPO, mode, remarks)
 - Press `F5` to update schedules, `Escape` to unfocus input, `q` to quit

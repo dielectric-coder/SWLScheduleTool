@@ -13,7 +13,7 @@ SWLScheduleTool/
 │   ├── swl-sched.desktop   # Desktop entry for app menu
 │   └── archlinux/PKGBUILD  # Arch Linux package build
 └── src/eibi_swl/           # Python package (src-layout)
-    ├── __init__.py          # __version__ = "1.0.1"
+    ├── __init__.py          # __version__ = "1.0.2"
     ├── _paths.py            # XDG path resolution (dev vs installed)
     ├── swl.py               # Interactive TUI dashboard (Textual)
     ├── checksked.py         # CLI frequency query tool (Rich)

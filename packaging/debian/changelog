@@ -1,3 +1,25 @@
+eibi-swl-dashboard (1.0.2-1) unstable; urgency=medium
+
+  * Fix azmap-gtk launch: pass only the target position so azmap-gtk keeps
+    the center from its own config instead of being overridden by the
+    swl-sched QTH.
+  * Launch azmap-gtk in its own session and reap it when it exits, so closed
+    map instances no longer linger as zombie processes.
+  * Report an azmap-gtk startup failure in the update log instead of
+    discarding its stderr.
+  * Correct GitHub URLs from mikewam to dielectric-coder, which also repairs
+    the source URL used by the Arch PKGBUILD.
+
+ -- Michel Lachaine <mike@mikelachaine.ca>  Wed, 05 Aug 2026 12:00:00 -0400
+
+eibi-swl-dashboard (1.0.1-1) unstable; urgency=medium
+
+  * Switch updatesked to plain HTTP for EiBi downloads.
+  * Security hardening and bug fixes across the codebase.
+  * Rename swl to swl-sched and add SWL logging.
+
+ -- Michel Lachaine <mike@mikelachaine.ca>  Mon, 16 Mar 2026 10:30:42 -0400
+
 eibi-swl-dashboard (1.0.0-1) unstable; urgency=medium
 
   * Initial release.

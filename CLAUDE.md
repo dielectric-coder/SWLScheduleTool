@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SWL Schedule Tool (v1.0.1) is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
+SWL Schedule Tool (v1.0.2) is a collection of Python utilities for shortwave listeners (SWL) to check broadcast schedules and find active stations. The tools query the EiBi (Eibi) shortwave broadcast schedule database to display real-time station information.
 
 ## Core Commands
 
@@ -41,7 +41,7 @@ Downloads the latest schedule data from EiBi for the specified season:
 
 ```
 src/eibi_swl/          # Python package installed to site-packages
-  __init__.py           # __version__ = "1.0.1"
+  __init__.py           # __version__ = "1.0.2"
   _paths.py             # XDG path resolution (dev vs installed)
   swl.py                # TUI dashboard
   checksked.py          # CLI frequency query

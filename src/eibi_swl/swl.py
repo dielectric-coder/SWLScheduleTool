@@ -13,6 +13,9 @@ import re
 import configparser
 import socket
 import subprocess
+import tempfile
+import threading
+import time
 from math import radians, sin, cos, sqrt, atan2, degrees
 from datetime import datetime, timezone
 
@@ -1087,18 +1090,56 @@ class SWLApp(App):
         except OSError:
             pass  # FIFO doesn't exist or no reader — launch new instance
 
+        self._launch_azmap(si["lat"], si["lon"], target_name, detail)
+
+    def _log_message(self, markup):
+        """Show a message in the update log pane."""
+        log = self.query_one("#update-log", RichLog)
+        log.add_class("visible")
+        log.write(markup)
+
+    def _launch_azmap(self, lat, lon, target_name, detail):
+        """Launch azMap detached, surfacing any error it reports on startup."""
+        # A file rather than a pipe: azMap can log for its whole lifetime
+        # without filling a buffer nobody is draining.
+        errfile = tempfile.TemporaryFile(mode="w+")
         try:
-            subprocess.Popen(
+            proc = subprocess.Popen(
+                # Target only — azmap-gtk takes its center from its own
+                # config, so don't override it with the swl-sched QTH.
                 ["azmap-gtk",
-                 str(self.qth["lat"]), str(self.qth["lon"]),
-                 str(si["lat"]), str(si["lon"]),
-                 "-c", self.qth["name"], "-t", target_name,
+                 str(lat), str(lon),
+                 "-t", target_name,
                  "-d", detail],
                 stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                stderr=errfile,
+                start_new_session=True,
             )
         except FileNotFoundError:
+            errfile.close()
             self.bell()
+            self._log_message("[bold red]azmap-gtk not found on PATH.[/bold red]")
+            return
+        # Daemon thread: reaps azMap the moment it exits so it never lingers
+        # as a zombie, without holding up our own shutdown if it outlives us.
+        threading.Thread(
+            target=self._watch_azmap, args=(proc, errfile), daemon=True).start()
+
+    AZMAP_STARTUP_SECS = 3
+
+    def _watch_azmap(self, proc, errfile):
+        """Reap azMap, reporting only a failure during startup."""
+        started = time.monotonic()
+        rc = proc.wait()
+        died_at_startup = (time.monotonic() - started) < self.AZMAP_STARTUP_SECS
+        errfile.seek(0)
+        err = errfile.read().strip()
+        errfile.close()
+        if died_at_startup and (rc != 0 or err):
+            reason = err or f"exit code {rc}"
+            self.call_from_thread(
+                self._log_message,
+                f"[bold red]azmap-gtk failed: {reason}[/bold red]")
 
     def _send_map_update_if_running(self):
         """Send current selection to azMap if FIFO has a reader, without launching a new instance."""
